@@ -994,6 +994,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../evolution/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    Evolution
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../tool/" class="md-nav__link">
         
   
@@ -1030,10 +1053,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_13" checked>
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_14" checked>
         
           
-          <label class="md-nav__link" for="__nav_2_13" id="__nav_2_13_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
             
   
   
@@ -1046,8 +1069,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_13_label" aria-expanded="true">
-          <label class="md-nav__title" for="__nav_2_13">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_14_label" aria-expanded="true">
+          <label class="md-nav__title" for="__nav_2_14">
             <span class="md-nav__icon md-icon"></span>
             Session
           </label>
@@ -1805,6 +1828,29 @@
 
               
             
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../mongodb/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    MongoDB Session
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
           </ul>
         </nav>
       
@@ -1831,10 +1877,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_14" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_15" >
         
           
-          <label class="md-nav__link" for="__nav_2_14" id="__nav_2_14_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_15" id="__nav_2_15_label" tabindex="0">
             
   
   
@@ -1847,8 +1893,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_14_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_14">
+        <nav class="md-nav" data-md-level="2" aria-labelledby="__nav_2_15_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_15">
             <span class="md-nav__icon md-icon"></span>
             Knowledge
           </label>
@@ -2079,10 +2125,10 @@
       
         
         
-        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_14_10" >
+        <input class="md-nav__toggle md-toggle " type="checkbox" id="__nav_2_15_10" >
         
           
-          <label class="md-nav__link" for="__nav_2_14_10" id="__nav_2_14_10_label" tabindex="0">
+          <label class="md-nav__link" for="__nav_2_15_10" id="__nav_2_15_10_label" tabindex="0">
             
   
   
@@ -2095,8 +2141,8 @@
             <span class="md-nav__icon md-icon"></span>
           </label>
         
-        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_14_10_label" aria-expanded="false">
-          <label class="md-nav__title" for="__nav_2_14_10">
+        <nav class="md-nav" data-md-level="3" aria-labelledby="__nav_2_15_10_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_2_15_10">
             <span class="md-nav__icon md-icon"></span>
             向量存储
           </label>
@@ -2852,6 +2898,29 @@
   
   <span class="md-ellipsis">
     构建智能 AI 应用的 Go 语言 Agent 框架
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../blog/summary/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    长任务 Agent 上下文管理的设计与评测
     
   </span>
   
@@ -4951,40 +5020,35 @@ resolver 返回 nil 会跳过自动摘要检查；如果直接调用 <code>Summa
 <tr>
 <td><code>SessionSummaryInjectionUser</code></td>
 <td>优先合并到第一条 user history/current message；否则在靠近 history 的位置注入</td>
-<td>摘要参与普通轮次裁剪，可被滑动窗口淘汰</td>
-<td>超长对话的滑动窗口场景</td>
+<td>摘要参与普通轮次裁剪，可被滑动窗口淘汰；也更利于保持稳定 system 前缀</td>
+<td>超长对话、prompt cache 敏感场景</td>
 </tr>
 </tbody>
 </table>
+<p>Memory preload 和 session recall preload 有各自独立的 placement 设置。为了兼容
+已有用户，它们默认仍注入 system context，因此会留在 token tailoring 的
+preserved head 中。如果 cache-sensitive 场景希望把它们也放到 user/history
+路径，需要显式 opt in：</p>
+<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1">1</a></span>
+<span class="normal"><a href="#__codelineno-26-2">2</a></span>
+<span class="normal"><a href="#__codelineno-26-3">3</a></span>
+<span class="normal"><a href="#__codelineno-26-4">4</a></span>
+<span class="normal"><a href="#__codelineno-26-5">5</a></span>
+<span class="normal"><a href="#__codelineno-26-6">6</a></span>
+<span class="normal"><a href="#__codelineno-26-7">7</a></span>
+<span class="normal"><a href="#__codelineno-26-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1"></a><span class="nx">agent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span>
+</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2"></a><span class="w">    </span><span class="s">&quot;my-agent&quot;</span><span class="p">,</span>
+</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithModel</span><span class="p">(</span><span class="nx">modelInstance</span><span class="p">),</span>
+</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithPreloadMemory</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithPreloadMemoryInjectionMode</span><span class="p">(</span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">PreloadMemoryInjectionUser</span><span class="p">),</span>
+</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithPreloadSessionRecall</span><span class="p">(</span><span class="mi">5</span><span class="p">),</span>
+</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithPreloadSessionRecallInjectionMode</span><span class="p">(</span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">PreloadSessionRecallInjectionUser</span><span class="p">),</span>
+</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8"></a><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>User placement 能让稳定 system 前缀更利于 prompt cache，但 preloaded memory
+和 recalled session events 会参与 token tailoring，可能被裁剪。</p>
 <p><strong>User 模式的消息结构</strong>：</p>
 <p>当 history 第一条消息为 user role 时，摘要会自动合并进去：</p>
-<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-26-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-26-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-26-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-26-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-26-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-26-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-26-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-26-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-26-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-26-10">10</a></span>
-<span class="normal"><a href="#__codelineno-26-11">11</a></span>
-<span class="normal"><a href="#__codelineno-26-12">12</a></span>
-<span class="normal"><a href="#__codelineno-26-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-26-1"><a id="__codelineno-26-1" name="__codelineno-26-1"></a>┌─────────────────────────────────────────┐
-</span><span id="__span-26-2"><a id="__codelineno-26-2" name="__codelineno-26-2"></a>│ System Prompt                           │ ← 不包含摘要
-</span><span id="__span-26-3"><a id="__codelineno-26-3" name="__codelineno-26-3"></a>├─────────────────────────────────────────┤
-</span><span id="__span-26-4"><a id="__codelineno-26-4" name="__codelineno-26-4"></a>│ [Few-shot examples, if any]             │
-</span><span id="__span-26-5"><a id="__codelineno-26-5" name="__codelineno-26-5"></a>├─────────────────────────────────────────┤
-</span><span id="__span-26-6"><a id="__codelineno-26-6" name="__codelineno-26-6"></a>│ User: [summary context] + [original    │
-</span><span id="__span-26-7"><a id="__codelineno-26-7" name="__codelineno-26-7"></a>│        first user message]              │ ← 摘要合并到第一条 user history
-</span><span id="__span-26-8"><a id="__codelineno-26-8" name="__codelineno-26-8"></a>├─────────────────────────────────────────┤
-</span><span id="__span-26-9"><a id="__codelineno-26-9" name="__codelineno-26-9"></a>│ Assistant: ...                          │
-</span><span id="__span-26-10"><a id="__codelineno-26-10" name="__codelineno-26-10"></a>│ User: ...                               │
-</span><span id="__span-26-11"><a id="__codelineno-26-11" name="__codelineno-26-11"></a>│ ...                                     │
-</span><span id="__span-26-12"><a id="__codelineno-26-12" name="__codelineno-26-12"></a>│ User: current message                   │
-</span><span id="__span-26-13"><a id="__codelineno-26-13" name="__codelineno-26-13"></a>└─────────────────────────────────────────┘
-</span></code></pre></div></td></tr></table></div>
-<p>当 history 第一条消息不是 user role 时，摘要作为独立 user message 插入：</p>
 <div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-27-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-27-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-27-3"> 3</a></span>
@@ -4996,18 +5060,45 @@ resolver 返回 nil 会跳过自动摘要检查；如果直接调用 <code>Summa
 <span class="normal"><a href="#__codelineno-27-9"> 9</a></span>
 <span class="normal"><a href="#__codelineno-27-10">10</a></span>
 <span class="normal"><a href="#__codelineno-27-11">11</a></span>
-<span class="normal"><a href="#__codelineno-27-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1"></a>┌─────────────────────────────────────────┐
+<span class="normal"><a href="#__codelineno-27-12">12</a></span>
+<span class="normal"><a href="#__codelineno-27-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-27-1"><a id="__codelineno-27-1" name="__codelineno-27-1"></a>┌─────────────────────────────────────────┐
 </span><span id="__span-27-2"><a id="__codelineno-27-2" name="__codelineno-27-2"></a>│ System Prompt                           │ ← 不包含摘要
 </span><span id="__span-27-3"><a id="__codelineno-27-3" name="__codelineno-27-3"></a>├─────────────────────────────────────────┤
 </span><span id="__span-27-4"><a id="__codelineno-27-4" name="__codelineno-27-4"></a>│ [Few-shot examples, if any]             │
 </span><span id="__span-27-5"><a id="__codelineno-27-5" name="__codelineno-27-5"></a>├─────────────────────────────────────────┤
-</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6"></a>│ User: Context from previous             │
-</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7"></a>│ interactions: &lt;summary&gt;...&lt;/summary&gt;    │ ← 独立的摘要 user message
+</span><span id="__span-27-6"><a id="__codelineno-27-6" name="__codelineno-27-6"></a>│ User: [summary context] + [original    │
+</span><span id="__span-27-7"><a id="__codelineno-27-7" name="__codelineno-27-7"></a>│        first user message]              │ ← 摘要合并到第一条 user history
 </span><span id="__span-27-8"><a id="__codelineno-27-8" name="__codelineno-27-8"></a>├─────────────────────────────────────────┤
-</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9"></a>│ Assistant/Tool history events           │
-</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10"></a>│ ...                                     │
-</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11"></a>│ User: current message                   │
-</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12"></a>└─────────────────────────────────────────┘
+</span><span id="__span-27-9"><a id="__codelineno-27-9" name="__codelineno-27-9"></a>│ Assistant: ...                          │
+</span><span id="__span-27-10"><a id="__codelineno-27-10" name="__codelineno-27-10"></a>│ User: ...                               │
+</span><span id="__span-27-11"><a id="__codelineno-27-11" name="__codelineno-27-11"></a>│ ...                                     │
+</span><span id="__span-27-12"><a id="__codelineno-27-12" name="__codelineno-27-12"></a>│ User: current message                   │
+</span><span id="__span-27-13"><a id="__codelineno-27-13" name="__codelineno-27-13"></a>└─────────────────────────────────────────┘
+</span></code></pre></div></td></tr></table></div>
+<p>当 history 第一条消息不是 user role 时，摘要作为独立 user message 插入：</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-28-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-28-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-28-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-28-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-28-10">10</a></span>
+<span class="normal"><a href="#__codelineno-28-11">11</a></span>
+<span class="normal"><a href="#__codelineno-28-12">12</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1"></a>┌─────────────────────────────────────────┐
+</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2"></a>│ System Prompt                           │ ← 不包含摘要
+</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3"></a>├─────────────────────────────────────────┤
+</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4"></a>│ [Few-shot examples, if any]             │
+</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5"></a>├─────────────────────────────────────────┤
+</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6"></a>│ User: Context from previous             │
+</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7"></a>│ interactions: &lt;summary&gt;...&lt;/summary&gt;    │ ← 独立的摘要 user message
+</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8"></a>├─────────────────────────────────────────┤
+</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9"></a>│ Assistant/Tool history events           │
+</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10"></a>│ ...                                     │
+</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11"></a>│ User: current message                   │
+</span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12"></a>└─────────────────────────────────────────┘
 </span></code></pre></div></td></tr></table></div>
 <p><strong>注意事项</strong>：</p>
 <ul>
@@ -5029,12 +5120,18 @@ LLM 摘要，也不会像 token tailoring 那样直接丢弃完整消息轮次�
 指 prompt-side tool result compaction/pruning；如果需要语义摘要，仍然由
 <code>WithAddSessionSummary(true)</code> 和会话摘要器负责。</p>
 </blockquote>
-<p>当开启 <code>WithEnableContextCompaction(true)</code> 时，框架会在真正调用模型前执行两遍压缩：</p>
+<p>当开启 <code>WithEnableContextCompaction(true)</code> 时，框架会在真正调用模型前按配置执行下面几类 <code>tool result</code> 压缩：</p>
+<p><strong>Pass 0 — 按工具名强制占位替换</strong>（<code>ForceCleanToolNames</code>，默认未配置）：</p>
+<ul>
+<li>只作用于命中 <code>ForceCleanToolNames</code> 的历史 <code>tool result</code>，不需要超过 <code>ContextCompactionToolResultMaxTokens</code> 阈值</li>
+<li>当前 request、recent 保护集合中的 request/invocation 不受影响；<code>KeepToolNames</code> 优先级更高</li>
+<li>适合清理 shell、grep、日志抓取等高噪声工具的历史输出</li>
+</ul>
 <p><strong>Pass 1 — 历史 tool result 占位替换</strong>（<code>ContextCompactionToolResultMaxTokens</code>，默认 1024 tokens）：</p>
 <ul>
 <li>只作用于<strong>旧 request</strong> 中超过阈值的 <code>tool result</code>，将其内容整体替换为简短占位符，但保留 <code>ToolID</code> 和 <code>ToolName</code></li>
-<li>当前 request 和最近 <code>ContextCompactionKeepRecentRequests</code> 个已完成 request 不受影响</li>
-<li>如果 <code>ToolResultCompactionConfig.SkipRecentFunc</code> 返回正数，尾部这些 event 所属的 request/invocation 也会被视为 recent，从而跳过 Pass 1</li>
+<li>current/recent 保护集合不受影响；这个集合包含当前 request、最近 <code>ContextCompactionKeepRecentRequests</code> 个已完成 request，以及 <code>ToolResultCompactionConfig.SkipRecentFunc</code> 返回的尾部 event 所属 request/invocation</li>
+<li><code>SkipRecentFunc</code> 与 <code>ContextCompactionKeepRecentRequests</code> 是并集关系；如果希望完全由自定义 recent 逻辑控制，可将 <code>ContextCompactionKeepRecentRequests</code> 设为 <code>0</code></li>
 <li>适合清理已不重要的历史工具输出</li>
 </ul>
 <p><strong>Pass 2 — 超大 tool result 截断</strong>（<code>ContextCompactionOversizedToolResultMaxTokens</code>，<strong>默认 0 / 关闭</strong>）：</p>
@@ -5043,16 +5140,16 @@ LLM 摘要，也不会像 token tailoring 那样直接丢弃完整消息轮次�
 <li>超过阈值的 tool result 会使用首尾保留策略截断：保留内容的开头和结尾，中间插入 <code>[...N characters truncated...]</code> 标记</li>
 <li>这是防止单个超大 tool result 直接撑爆 context window 的安全网（例如 <code>web_fetch</code> 返回 800K+ 字符的 HTML）</li>
 </ul>
-<p>两遍压缩的定位不同：Pass 1 低阈值、全量替换，激进清理旧历史；Pass 2 高阈值、只在极端情况触发，但能保护当前 request。</p>
+<p>几类压缩的定位不同：Pass 0 是显式工具名策略；Pass 1 低阈值、全量替换，激进清理旧历史；Pass 2 高阈值、只在极端情况触发，也可能作用于当前 request。</p>
 <p>Pass 2 默认是关闭的（<code>0</code>），需要满足两个条件才会生效：(1) <code>WithEnableContextCompaction(true)</code> 总开关已打开；(2) <code>ContextCompactionOversizedToolResultMaxTokens &gt; 0</code>（推荐显式传入 <code>8192</code>，可读取常量 <code>processor.DefaultContextCompactionOversizedToolResultMaxTokens</code>）。这样 <code>EnableContextCompaction=false</code> 在语义上始终等于"框架不会修改任何 tool result"。</p>
 <p>如果需要按工具名控制行为，可以使用 <code>WithToolResultCompactionConfig(...)</code>：</p>
 <ul>
-<li><code>ForceCleanToolNames</code>：这些 tool 的历史结果在 context compaction 开启、且 current/recent 保护生效之后会直接替换为策略占位符，适合 shell、grep、日志抓取等高噪声工具</li>
+<li><code>ForceCleanToolNames</code>：这些 tool 的历史结果在 context compaction 开启、且 current/recent 保护生效之后会通过 Pass 0 直接替换为策略占位符，适合 shell、grep、日志抓取等高噪声工具</li>
 <li><code>KeepToolNames</code>：这些 tool 的结果不会被 context compaction 清理，适合 <code>session_load</code>、<code>session_search</code> 这类模型可能需要逐字读取的恢复工具</li>
-<li><code>SkipRecentFunc</code>：自定义尾部多少个 event 视为 recent，影响 Pass 0 强制清理和 Pass 1 的"历史"判定；Pass 2 仍会处理 recent/current 中的超大 tool result</li>
+<li><code>SkipRecentFunc</code>：自定义尾部多少个 event 视为 recent，和 <code>ContextCompactionKeepRecentRequests</code> 一起组成 recent 保护集合，影响 Pass 0 强制清理和 Pass 1 的"历史"判定；Pass 2 仍会处理 recent/current 中的超大 tool result</li>
 </ul>
 <p>如果同一个 tool name 同时出现在 <code>ForceCleanToolNames</code> 和 <code>KeepToolNames</code> 中，<code>KeepToolNames</code> 优先。</p>
-<p>当被压缩的事件有 <code>event_id</code> 时，占位符或截断标记会携带 <code>event_id</code>、<code>tool_call_id</code>、<code>tool_name</code> 等恢复线索。开启 <code>WithEnableOnDemandSession(true)</code> 且后端实现 <code>session.WindowService</code> 后，模型可以调用 <code>session_load</code>，用 <code>content_offset</code> / <code>content_limit</code> 精确加载原始 tool result 的小片段。<code>session_load</code> 的返回大小由它自己的窗口参数和 <code>content_limit</code> 控制；读取超大结果时建议分片加载，而不是一次请求全文。</p>
+<p>当 Pass 1 占位符或 Pass 2 截断标记对应的事件有 <code>event_id</code> 时，会携带 <code>event_id</code>、<code>tool_call_id</code>、<code>tool_name</code> 等恢复线索；Pass 0 的策略占位符不携带这些恢复线索。开启 <code>WithEnableOnDemandSession(true)</code> 且后端实现 <code>session.WindowService</code> 后，模型可以调用 <code>session_load</code>，用 <code>content_offset</code> / <code>content_limit</code> 精确加载原始 tool result 的小片段。<code>session_load</code> 的返回大小由它自己的窗口参数和 <code>content_limit</code> 控制；读取超大结果时建议分片加载，而不是一次请求全文。</p>
 <p>此外：</p>
 <ul>
 <li>如果同时开启了 <code>WithAddSessionSummary(true)</code>，并且压完后请求仍接近 context window，会在 LLM 调用前同步执行一次 <code>CreateSessionSummary(...)</code> 并重建 request</li>
@@ -5062,72 +5159,7 @@ LLM 摘要，也不会像 token tailoring 那样直接丢弃完整消息轮次�
   <code>WithContextCompactionTokenCounter(...)</code> 传入同一个 counter，让 Pass 1 判断和
   Pass 2 截断与模型层 token tailoring 使用一致的估算口径。</li>
 </ul>
-<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-28-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-28-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-28-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-28-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-28-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-28-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-28-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-28-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-28-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-28-10">10</a></span>
-<span class="normal"><a href="#__codelineno-28-11">11</a></span>
-<span class="normal"><a href="#__codelineno-28-12">12</a></span>
-<span class="normal"><a href="#__codelineno-28-13">13</a></span>
-<span class="normal"><a href="#__codelineno-28-14">14</a></span>
-<span class="normal"><a href="#__codelineno-28-15">15</a></span>
-<span class="normal"><a href="#__codelineno-28-16">16</a></span>
-<span class="normal"><a href="#__codelineno-28-17">17</a></span>
-<span class="normal"><a href="#__codelineno-28-18">18</a></span>
-<span class="normal"><a href="#__codelineno-28-19">19</a></span>
-<span class="normal"><a href="#__codelineno-28-20">20</a></span>
-<span class="normal"><a href="#__codelineno-28-21">21</a></span>
-<span class="normal"><a href="#__codelineno-28-22">22</a></span>
-<span class="normal"><a href="#__codelineno-28-23">23</a></span>
-<span class="normal"><a href="#__codelineno-28-24">24</a></span>
-<span class="normal"><a href="#__codelineno-28-25">25</a></span>
-<span class="normal"><a href="#__codelineno-28-26">26</a></span>
-<span class="normal"><a href="#__codelineno-28-27">27</a></span>
-<span class="normal"><a href="#__codelineno-28-28">28</a></span>
-<span class="normal"><a href="#__codelineno-28-29">29</a></span>
-<span class="normal"><a href="#__codelineno-28-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-28-1"><a id="__codelineno-28-1" name="__codelineno-28-1"></a><span class="nx">counter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewSimpleTokenCounter</span><span class="p">(</span>
-</span><span id="__span-28-2"><a id="__codelineno-28-2" name="__codelineno-28-2"></a><span class="w">    </span><span class="nx">model</span><span class="p">.</span><span class="nx">WithApproxRunesPerToken</span><span class="p">(</span><span class="mf">1.6</span><span class="p">),</span><span class="w"> </span><span class="c1">// 约 1.6 字符/token；该值是除数，不是乘数</span>
-</span><span id="__span-28-3"><a id="__codelineno-28-3" name="__codelineno-28-3"></a><span class="p">)</span>
-</span><span id="__span-28-4"><a id="__codelineno-28-4" name="__codelineno-28-4"></a>
-</span><span id="__span-28-5"><a id="__codelineno-28-5" name="__codelineno-28-5"></a><span class="nx">modelInstance</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openai</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span>
-</span><span id="__span-28-6"><a id="__codelineno-28-6" name="__codelineno-28-6"></a><span class="w">    </span><span class="s">&quot;deepseek-v4-flash&quot;</span><span class="p">,</span>
-</span><span id="__span-28-7"><a id="__codelineno-28-7" name="__codelineno-28-7"></a><span class="w">    </span><span class="nx">openai</span><span class="p">.</span><span class="nx">WithEnableTokenTailoring</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
-</span><span id="__span-28-8"><a id="__codelineno-28-8" name="__codelineno-28-8"></a><span class="w">    </span><span class="nx">openai</span><span class="p">.</span><span class="nx">WithTokenCounter</span><span class="p">(</span><span class="nx">counter</span><span class="p">),</span>
-</span><span id="__span-28-9"><a id="__codelineno-28-9" name="__codelineno-28-9"></a><span class="p">)</span>
-</span><span id="__span-28-10"><a id="__codelineno-28-10" name="__codelineno-28-10"></a>
-</span><span id="__span-28-11"><a id="__codelineno-28-11" name="__codelineno-28-11"></a><span class="nx">agent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span>
-</span><span id="__span-28-12"><a id="__codelineno-28-12" name="__codelineno-28-12"></a><span class="w">    </span><span class="s">&quot;my-agent&quot;</span><span class="p">,</span>
-</span><span id="__span-28-13"><a id="__codelineno-28-13" name="__codelineno-28-13"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithModel</span><span class="p">(</span><span class="nx">modelInstance</span><span class="p">),</span>
-</span><span id="__span-28-14"><a id="__codelineno-28-14" name="__codelineno-28-14"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithAddSessionSummary</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
-</span><span id="__span-28-15"><a id="__codelineno-28-15" name="__codelineno-28-15"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithEnableContextCompaction</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span><span class="w"> </span><span class="c1">// 只压 tool result，不生成摘要</span>
-</span><span id="__span-28-16"><a id="__codelineno-28-16" name="__codelineno-28-16"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithContextCompactionThresholdRatio</span><span class="p">(</span><span class="mf">0.7</span><span class="p">),</span>
-</span><span id="__span-28-17"><a id="__codelineno-28-17" name="__codelineno-28-17"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithContextCompactionToolResultMaxTokens</span><span class="p">(</span><span class="mi">1024</span><span class="p">),</span><span class="w">  </span><span class="c1">// Pass 1: 旧 tool result → 占位符</span>
-</span><span id="__span-28-18"><a id="__codelineno-28-18" name="__codelineno-28-18"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithContextCompactionOversizedToolResultMaxTokens</span><span class="p">(</span><span class="mi">8192</span><span class="p">),</span><span class="w">  </span><span class="c1">// Pass 2: 任意超大 result → 首尾保留截断</span>
-</span><span id="__span-28-19"><a id="__codelineno-28-19" name="__codelineno-28-19"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithContextCompactionKeepRecentRequests</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
-</span><span id="__span-28-20"><a id="__codelineno-28-20" name="__codelineno-28-20"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithContextCompactionTokenCounter</span><span class="p">(</span><span class="nx">counter</span><span class="p">),</span>
-</span><span id="__span-28-21"><a id="__codelineno-28-21" name="__codelineno-28-21"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithToolResultCompactionConfig</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">ToolResultCompactionConfig</span><span class="p">{</span>
-</span><span id="__span-28-22"><a id="__codelineno-28-22" name="__codelineno-28-22"></a><span class="w">        </span><span class="nx">ForceCleanToolNames</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;shell&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;grep&quot;</span><span class="p">},</span>
-</span><span id="__span-28-23"><a id="__codelineno-28-23" name="__codelineno-28-23"></a><span class="w">        </span><span class="nx">KeepToolNames</span><span class="p">:</span><span class="w">       </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;session_load&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;session_search&quot;</span><span class="p">},</span>
-</span><span id="__span-28-24"><a id="__codelineno-28-24" name="__codelineno-28-24"></a><span class="w">        </span><span class="nx">SkipRecentFunc</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">events</span><span class="w"> </span><span class="p">[]</span><span class="nx">event</span><span class="p">.</span><span class="nx">Event</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-28-25"><a id="__codelineno-28-25" name="__codelineno-28-25"></a><span class="w">            </span><span class="c1">// 例如保护最后 3 个 event 对应的 request/invocation，</span>
-</span><span id="__span-28-26"><a id="__codelineno-28-26" name="__codelineno-28-26"></a><span class="w">            </span><span class="c1">// 避免仍在收尾的工具链路被 Pass 1 当成历史清理。</span>
-</span><span id="__span-28-27"><a id="__codelineno-28-27" name="__codelineno-28-27"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">3</span>
-</span><span id="__span-28-28"><a id="__codelineno-28-28" name="__codelineno-28-28"></a><span class="w">        </span><span class="p">},</span>
-</span><span id="__span-28-29"><a id="__codelineno-28-29" name="__codelineno-28-29"></a><span class="w">    </span><span class="p">}),</span>
-</span><span id="__span-28-30"><a id="__codelineno-28-30" name="__codelineno-28-30"></a><span class="p">)</span>
-</span></code></pre></div></td></tr></table></div>
-<p>完整示例见
-<a href="https://github.com/trpc-group/trpc-agent-go/tree/main/examples/context_compaction">examples/context_compaction</a>。
-该示例会调用真实模型，默认通过 <code>-debug=true</code> 打印每次实际发送给模型的
-request，用来检查历史大 <code>tool result</code> 是否按预期被替换为占位符。</p>
-<p><strong>上下文结构</strong>：</p>
-<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
+<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-29-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-29-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-29-3"> 3</a></span>
 <span class="normal"><a href="#__codelineno-29-4"> 4</a></span>
@@ -5136,16 +5168,81 @@ request，用来检查历史大 <code>tool result</code> 是否按预期被替�
 <span class="normal"><a href="#__codelineno-29-7"> 7</a></span>
 <span class="normal"><a href="#__codelineno-29-8"> 8</a></span>
 <span class="normal"><a href="#__codelineno-29-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-29-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1"></a>┌─────────────────────────────────────────┐
-</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2"></a>│ System Prompt                           │
-</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3"></a>│ (merged with Session Summary)           │ ← 系统提示 + 浓缩历史
-</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4"></a>├─────────────────────────────────────────┤
-</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5"></a>│ Event 1 (after summary)                 │ ┐
-</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6"></a>│ Event 2                                 │ │
-</span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7"></a>│ Event 3                                 │ │ 摘要后的新事件
-</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8"></a>│ ...                                     │ │ (完整保留)
-</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9"></a>│ Event N (current message)               │ ┘
-</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10"></a>└─────────────────────────────────────────┘
+<span class="normal"><a href="#__codelineno-29-10">10</a></span>
+<span class="normal"><a href="#__codelineno-29-11">11</a></span>
+<span class="normal"><a href="#__codelineno-29-12">12</a></span>
+<span class="normal"><a href="#__codelineno-29-13">13</a></span>
+<span class="normal"><a href="#__codelineno-29-14">14</a></span>
+<span class="normal"><a href="#__codelineno-29-15">15</a></span>
+<span class="normal"><a href="#__codelineno-29-16">16</a></span>
+<span class="normal"><a href="#__codelineno-29-17">17</a></span>
+<span class="normal"><a href="#__codelineno-29-18">18</a></span>
+<span class="normal"><a href="#__codelineno-29-19">19</a></span>
+<span class="normal"><a href="#__codelineno-29-20">20</a></span>
+<span class="normal"><a href="#__codelineno-29-21">21</a></span>
+<span class="normal"><a href="#__codelineno-29-22">22</a></span>
+<span class="normal"><a href="#__codelineno-29-23">23</a></span>
+<span class="normal"><a href="#__codelineno-29-24">24</a></span>
+<span class="normal"><a href="#__codelineno-29-25">25</a></span>
+<span class="normal"><a href="#__codelineno-29-26">26</a></span>
+<span class="normal"><a href="#__codelineno-29-27">27</a></span>
+<span class="normal"><a href="#__codelineno-29-28">28</a></span>
+<span class="normal"><a href="#__codelineno-29-29">29</a></span>
+<span class="normal"><a href="#__codelineno-29-30">30</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-29-1"><a id="__codelineno-29-1" name="__codelineno-29-1"></a><span class="nx">counter</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewSimpleTokenCounter</span><span class="p">(</span>
+</span><span id="__span-29-2"><a id="__codelineno-29-2" name="__codelineno-29-2"></a><span class="w">    </span><span class="nx">model</span><span class="p">.</span><span class="nx">WithApproxRunesPerToken</span><span class="p">(</span><span class="mf">1.6</span><span class="p">),</span><span class="w"> </span><span class="c1">// 约 1.6 字符/token；该值是除数，不是乘数</span>
+</span><span id="__span-29-3"><a id="__codelineno-29-3" name="__codelineno-29-3"></a><span class="p">)</span>
+</span><span id="__span-29-4"><a id="__codelineno-29-4" name="__codelineno-29-4"></a>
+</span><span id="__span-29-5"><a id="__codelineno-29-5" name="__codelineno-29-5"></a><span class="nx">modelInstance</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openai</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span>
+</span><span id="__span-29-6"><a id="__codelineno-29-6" name="__codelineno-29-6"></a><span class="w">    </span><span class="s">&quot;deepseek-v4-flash&quot;</span><span class="p">,</span>
+</span><span id="__span-29-7"><a id="__codelineno-29-7" name="__codelineno-29-7"></a><span class="w">    </span><span class="nx">openai</span><span class="p">.</span><span class="nx">WithEnableTokenTailoring</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
+</span><span id="__span-29-8"><a id="__codelineno-29-8" name="__codelineno-29-8"></a><span class="w">    </span><span class="nx">openai</span><span class="p">.</span><span class="nx">WithTokenCounter</span><span class="p">(</span><span class="nx">counter</span><span class="p">),</span>
+</span><span id="__span-29-9"><a id="__codelineno-29-9" name="__codelineno-29-9"></a><span class="p">)</span>
+</span><span id="__span-29-10"><a id="__codelineno-29-10" name="__codelineno-29-10"></a>
+</span><span id="__span-29-11"><a id="__codelineno-29-11" name="__codelineno-29-11"></a><span class="nx">agent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span>
+</span><span id="__span-29-12"><a id="__codelineno-29-12" name="__codelineno-29-12"></a><span class="w">    </span><span class="s">&quot;my-agent&quot;</span><span class="p">,</span>
+</span><span id="__span-29-13"><a id="__codelineno-29-13" name="__codelineno-29-13"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithModel</span><span class="p">(</span><span class="nx">modelInstance</span><span class="p">),</span>
+</span><span id="__span-29-14"><a id="__codelineno-29-14" name="__codelineno-29-14"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithAddSessionSummary</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
+</span><span id="__span-29-15"><a id="__codelineno-29-15" name="__codelineno-29-15"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithEnableContextCompaction</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span><span class="w"> </span><span class="c1">// 只压 tool result，不生成摘要</span>
+</span><span id="__span-29-16"><a id="__codelineno-29-16" name="__codelineno-29-16"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithContextCompactionThresholdRatio</span><span class="p">(</span><span class="mf">0.7</span><span class="p">),</span>
+</span><span id="__span-29-17"><a id="__codelineno-29-17" name="__codelineno-29-17"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithContextCompactionToolResultMaxTokens</span><span class="p">(</span><span class="mi">1024</span><span class="p">),</span><span class="w">  </span><span class="c1">// Pass 1: 旧 tool result → 占位符</span>
+</span><span id="__span-29-18"><a id="__codelineno-29-18" name="__codelineno-29-18"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithContextCompactionOversizedToolResultMaxTokens</span><span class="p">(</span><span class="mi">8192</span><span class="p">),</span><span class="w">  </span><span class="c1">// Pass 2: 任意超大 result → 首尾保留截断</span>
+</span><span id="__span-29-19"><a id="__codelineno-29-19" name="__codelineno-29-19"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithContextCompactionKeepRecentRequests</span><span class="p">(</span><span class="mi">1</span><span class="p">),</span>
+</span><span id="__span-29-20"><a id="__codelineno-29-20" name="__codelineno-29-20"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithContextCompactionTokenCounter</span><span class="p">(</span><span class="nx">counter</span><span class="p">),</span>
+</span><span id="__span-29-21"><a id="__codelineno-29-21" name="__codelineno-29-21"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithToolResultCompactionConfig</span><span class="p">(</span><span class="o">&amp;</span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">ToolResultCompactionConfig</span><span class="p">{</span>
+</span><span id="__span-29-22"><a id="__codelineno-29-22" name="__codelineno-29-22"></a><span class="w">        </span><span class="nx">ForceCleanToolNames</span><span class="p">:</span><span class="w"> </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;shell&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;grep&quot;</span><span class="p">},</span>
+</span><span id="__span-29-23"><a id="__codelineno-29-23" name="__codelineno-29-23"></a><span class="w">        </span><span class="nx">KeepToolNames</span><span class="p">:</span><span class="w">       </span><span class="p">[]</span><span class="kt">string</span><span class="p">{</span><span class="s">&quot;session_load&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;session_search&quot;</span><span class="p">},</span>
+</span><span id="__span-29-24"><a id="__codelineno-29-24" name="__codelineno-29-24"></a><span class="w">        </span><span class="nx">SkipRecentFunc</span><span class="p">:</span><span class="w"> </span><span class="kd">func</span><span class="p">(</span><span class="nx">events</span><span class="w"> </span><span class="p">[]</span><span class="nx">event</span><span class="p">.</span><span class="nx">Event</span><span class="p">)</span><span class="w"> </span><span class="kt">int</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-29-25"><a id="__codelineno-29-25" name="__codelineno-29-25"></a><span class="w">            </span><span class="c1">// 例如保护最后 3 个 event 对应的 request/invocation，</span>
+</span><span id="__span-29-26"><a id="__codelineno-29-26" name="__codelineno-29-26"></a><span class="w">            </span><span class="c1">// 避免仍在收尾的工具链路被 Pass 1 当成历史清理。</span>
+</span><span id="__span-29-27"><a id="__codelineno-29-27" name="__codelineno-29-27"></a><span class="w">            </span><span class="k">return</span><span class="w"> </span><span class="mi">3</span>
+</span><span id="__span-29-28"><a id="__codelineno-29-28" name="__codelineno-29-28"></a><span class="w">        </span><span class="p">},</span>
+</span><span id="__span-29-29"><a id="__codelineno-29-29" name="__codelineno-29-29"></a><span class="w">    </span><span class="p">}),</span>
+</span><span id="__span-29-30"><a id="__codelineno-29-30" name="__codelineno-29-30"></a><span class="p">)</span>
+</span></code></pre></div></td></tr></table></div>
+<p>完整示例见
+<a href="https://github.com/trpc-group/trpc-agent-go/tree/main/examples/context_compaction">examples/context_compaction</a>。
+该示例会调用真实模型，默认通过 <code>-debug=true</code> 打印每次实际发送给模型的
+request，用来检查历史大 <code>tool result</code> 是否按预期被替换为占位符。</p>
+<p><strong>上下文结构</strong>：</p>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-30-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-30-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-30-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-30-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-30-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-30-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-30-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-30-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-30-10">10</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1"></a>┌─────────────────────────────────────────┐
+</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2"></a>│ System Prompt                           │
+</span><span id="__span-30-3"><a id="__codelineno-30-3" name="__codelineno-30-3"></a>│ (merged with Session Summary)           │ ← 系统提示 + 浓缩历史
+</span><span id="__span-30-4"><a id="__codelineno-30-4" name="__codelineno-30-4"></a>├─────────────────────────────────────────┤
+</span><span id="__span-30-5"><a id="__codelineno-30-5" name="__codelineno-30-5"></a>│ Event 1 (after summary)                 │ ┐
+</span><span id="__span-30-6"><a id="__codelineno-30-6" name="__codelineno-30-6"></a>│ Event 2                                 │ │
+</span><span id="__span-30-7"><a id="__codelineno-30-7" name="__codelineno-30-7"></a>│ Event 3                                 │ │ 摘要后的新事件
+</span><span id="__span-30-8"><a id="__codelineno-30-8" name="__codelineno-30-8"></a>│ ...                                     │ │ (完整保留)
+</span><span id="__span-30-9"><a id="__codelineno-30-9" name="__codelineno-30-9"></a>│ Event N (current message)               │ ┘
+</span><span id="__span-30-10"><a id="__codelineno-30-10" name="__codelineno-30-10"></a>└─────────────────────────────────────────┘
 </span></code></pre></div></td></tr></table></div>
 <p><strong>模型兼容性</strong>：</p>
 <p>部分 LLM 提供商对系统消息的位置和数量有严格要求：</p>
@@ -5155,9 +5252,9 @@ request，用来检查历史大 <code>tool result</code> 是否按预期被替�
 <li>预加载的内存内容也会通过相同机制合并到系统消息中</li>
 </ul>
 <h3 id="2_1">模式 2：不使用摘要</h3>
-<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-30-1">1</a></span>
-<span class="normal"><a href="#__codelineno-30-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-30-1"><a id="__codelineno-30-1" name="__codelineno-30-1"></a><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithAddSessionSummary</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
-</span><span id="__span-30-2"><a id="__codelineno-30-2" name="__codelineno-30-2"></a><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithMaxHistoryRuns</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w">  </span><span class="c1">// 限制历史轮次</span>
+<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
+<span class="normal"><a href="#__codelineno-31-2">2</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1"></a><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithAddSessionSummary</span><span class="p">(</span><span class="kc">false</span><span class="p">)</span>
+</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2"></a><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithMaxHistoryRuns</span><span class="p">(</span><span class="mi">10</span><span class="p">)</span><span class="w">  </span><span class="c1">// 限制历史轮次</span>
 </span></code></pre></div></td></tr></table></div>
 <p><strong>工作方式</strong>：</p>
 <ul>
@@ -5168,21 +5265,21 @@ request，用来检查历史大 <code>tool result</code> 是否按预期被替�
 <li>这个模式下不会触发 pre-LLM 的同步摘要重试</li>
 </ul>
 <p><strong>上下文结构</strong>：</p>
-<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-31-1">1</a></span>
-<span class="normal"><a href="#__codelineno-31-2">2</a></span>
-<span class="normal"><a href="#__codelineno-31-3">3</a></span>
-<span class="normal"><a href="#__codelineno-31-4">4</a></span>
-<span class="normal"><a href="#__codelineno-31-5">5</a></span>
-<span class="normal"><a href="#__codelineno-31-6">6</a></span>
-<span class="normal"><a href="#__codelineno-31-7">7</a></span>
-<span class="normal"><a href="#__codelineno-31-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-31-1"><a id="__codelineno-31-1" name="__codelineno-31-1"></a>┌─────────────────────────────────────────┐
-</span><span id="__span-31-2"><a id="__codelineno-31-2" name="__codelineno-31-2"></a>│ System Prompt                           │
-</span><span id="__span-31-3"><a id="__codelineno-31-3" name="__codelineno-31-3"></a>├─────────────────────────────────────────┤
-</span><span id="__span-31-4"><a id="__codelineno-31-4" name="__codelineno-31-4"></a>│ Event N-k+1                             │ ┐
-</span><span id="__span-31-5"><a id="__codelineno-31-5" name="__codelineno-31-5"></a>│ Event N-k+2                             │ │ Last k runs
-</span><span id="__span-31-6"><a id="__codelineno-31-6" name="__codelineno-31-6"></a>│ ...                                     │ │ (MaxHistoryRuns=k)
-</span><span id="__span-31-7"><a id="__codelineno-31-7" name="__codelineno-31-7"></a>│ Event N (current message)               │ ┘
-</span><span id="__span-31-8"><a id="__codelineno-31-8" name="__codelineno-31-8"></a>└─────────────────────────────────────────┘
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
+<span class="normal"><a href="#__codelineno-32-2">2</a></span>
+<span class="normal"><a href="#__codelineno-32-3">3</a></span>
+<span class="normal"><a href="#__codelineno-32-4">4</a></span>
+<span class="normal"><a href="#__codelineno-32-5">5</a></span>
+<span class="normal"><a href="#__codelineno-32-6">6</a></span>
+<span class="normal"><a href="#__codelineno-32-7">7</a></span>
+<span class="normal"><a href="#__codelineno-32-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1"></a>┌─────────────────────────────────────────┐
+</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2"></a>│ System Prompt                           │
+</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3"></a>├─────────────────────────────────────────┤
+</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4"></a>│ Event N-k+1                             │ ┐
+</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5"></a>│ Event N-k+2                             │ │ Last k runs
+</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6"></a>│ ...                                     │ │ (MaxHistoryRuns=k)
+</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7"></a>│ Event N (current message)               │ ┘
+</span><span id="__span-32-8"><a id="__codelineno-32-8" name="__codelineno-32-8"></a>└─────────────────────────────────────────┘
 </span></code></pre></div></td></tr></table></div>
 <h3 id="_20">模式选择建议</h3>
 <table>
@@ -5223,36 +5320,36 @@ request，用来检查历史大 <code>tool result</code> 是否按预期被替�
 <h2 id="_21">摘要格式自定义</h2>
 <p>默认情况下，会话摘要会以包含上下文标签和关于优先考虑当前对话信息的提示进行格式化：</p>
 <p><strong>默认格式</strong>：</p>
-<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-32-1">1</a></span>
-<span class="normal"><a href="#__codelineno-32-2">2</a></span>
-<span class="normal"><a href="#__codelineno-32-3">3</a></span>
-<span class="normal"><a href="#__codelineno-32-4">4</a></span>
-<span class="normal"><a href="#__codelineno-32-5">5</a></span>
-<span class="normal"><a href="#__codelineno-32-6">6</a></span>
-<span class="normal"><a href="#__codelineno-32-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-32-1"><a id="__codelineno-32-1" name="__codelineno-32-1"></a>Here is a brief summary of your previous interactions:
-</span><span id="__span-32-2"><a id="__codelineno-32-2" name="__codelineno-32-2"></a>
-</span><span id="__span-32-3"><a id="__codelineno-32-3" name="__codelineno-32-3"></a>&lt;summary_of_previous_interactions&gt;
-</span><span id="__span-32-4"><a id="__codelineno-32-4" name="__codelineno-32-4"></a>[Summary content]
-</span><span id="__span-32-5"><a id="__codelineno-32-5" name="__codelineno-32-5"></a>&lt;/summary_of_previous_interactions&gt;
-</span><span id="__span-32-6"><a id="__codelineno-32-6" name="__codelineno-32-6"></a>
-</span><span id="__span-32-7"><a id="__codelineno-32-7" name="__codelineno-32-7"></a>Note: this information is from previous interactions and may be outdated. You should ALWAYS prefer information from this conversation over the past summary.
-</span></code></pre></div></td></tr></table></div>
-<p>您可以使用 <code>WithSummaryFormatter</code> 来自定义摘要格式：</p>
-<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span>
+<div class="language-text highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-33-1">1</a></span>
 <span class="normal"><a href="#__codelineno-33-2">2</a></span>
 <span class="normal"><a href="#__codelineno-33-3">3</a></span>
 <span class="normal"><a href="#__codelineno-33-4">4</a></span>
 <span class="normal"><a href="#__codelineno-33-5">5</a></span>
 <span class="normal"><a href="#__codelineno-33-6">6</a></span>
-<span class="normal"><a href="#__codelineno-33-7">7</a></span>
-<span class="normal"><a href="#__codelineno-33-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1"></a><span class="nx">agent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span>
-</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2"></a><span class="w">    </span><span class="s">&quot;my-agent&quot;</span><span class="p">,</span>
-</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithModel</span><span class="p">(</span><span class="nx">modelInstance</span><span class="p">),</span>
-</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithAddSessionSummary</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
-</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithSummaryFormatter</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">summary</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;## Previous Context\n\n%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">summary</span><span class="p">)</span>
-</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7"></a><span class="w">    </span><span class="p">}),</span>
-</span><span id="__span-33-8"><a id="__codelineno-33-8" name="__codelineno-33-8"></a><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-33-7">7</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-33-1"><a id="__codelineno-33-1" name="__codelineno-33-1"></a>Here is a brief summary of your previous interactions:
+</span><span id="__span-33-2"><a id="__codelineno-33-2" name="__codelineno-33-2"></a>
+</span><span id="__span-33-3"><a id="__codelineno-33-3" name="__codelineno-33-3"></a>&lt;summary_of_previous_interactions&gt;
+</span><span id="__span-33-4"><a id="__codelineno-33-4" name="__codelineno-33-4"></a>[Summary content]
+</span><span id="__span-33-5"><a id="__codelineno-33-5" name="__codelineno-33-5"></a>&lt;/summary_of_previous_interactions&gt;
+</span><span id="__span-33-6"><a id="__codelineno-33-6" name="__codelineno-33-6"></a>
+</span><span id="__span-33-7"><a id="__codelineno-33-7" name="__codelineno-33-7"></a>Note: this information is from previous interactions and may be outdated. You should ALWAYS prefer information from this conversation over the past summary.
+</span></code></pre></div></td></tr></table></div>
+<p>您可以使用 <code>WithSummaryFormatter</code> 来自定义摘要格式：</p>
+<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1">1</a></span>
+<span class="normal"><a href="#__codelineno-34-2">2</a></span>
+<span class="normal"><a href="#__codelineno-34-3">3</a></span>
+<span class="normal"><a href="#__codelineno-34-4">4</a></span>
+<span class="normal"><a href="#__codelineno-34-5">5</a></span>
+<span class="normal"><a href="#__codelineno-34-6">6</a></span>
+<span class="normal"><a href="#__codelineno-34-7">7</a></span>
+<span class="normal"><a href="#__codelineno-34-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="nx">agent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span>
+</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2"></a><span class="w">    </span><span class="s">&quot;my-agent&quot;</span><span class="p">,</span>
+</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithModel</span><span class="p">(</span><span class="nx">modelInstance</span><span class="p">),</span>
+</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithAddSessionSummary</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
+</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5"></a><span class="w">    </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithSummaryFormatter</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">summary</span><span class="w"> </span><span class="kt">string</span><span class="p">)</span><span class="w"> </span><span class="kt">string</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Sprintf</span><span class="p">(</span><span class="s">&quot;## Previous Context\n\n%s&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">summary</span><span class="p">)</span>
+</span><span id="__span-34-7"><a id="__codelineno-34-7" name="__codelineno-34-7"></a><span class="w">    </span><span class="p">}),</span>
+</span><span id="__span-34-8"><a id="__codelineno-34-8" name="__codelineno-34-8"></a><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <p><strong>使用场景</strong>：</p>
 <ul>
@@ -5262,41 +5359,6 @@ request，用来检查历史大 <code>tool result</code> 是否按预期被替�
 <li><strong>模型优化</strong>：根据特定模型的偏好调整格式</li>
 </ul>
 <h2 id="_22">获取摘要</h2>
-<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-34-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-34-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-34-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-34-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-34-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-34-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-34-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-34-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-34-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-34-10">10</a></span>
-<span class="normal"><a href="#__codelineno-34-11">11</a></span>
-<span class="normal"><a href="#__codelineno-34-12">12</a></span>
-<span class="normal"><a href="#__codelineno-34-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-34-1"><a id="__codelineno-34-1" name="__codelineno-34-1"></a><span class="c1">// 获取完整会话摘要（默认）</span>
-</span><span id="__span-34-2"><a id="__codelineno-34-2" name="__codelineno-34-2"></a><span class="nx">summaryText</span><span class="p">,</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sessionService</span><span class="p">.</span><span class="nx">GetSessionSummaryText</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">sess</span><span class="p">)</span>
-</span><span id="__span-34-3"><a id="__codelineno-34-3" name="__codelineno-34-3"></a><span class="k">if</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-34-4"><a id="__codelineno-34-4" name="__codelineno-34-4"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;摘要: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">summaryText</span><span class="p">)</span>
-</span><span id="__span-34-5"><a id="__codelineno-34-5" name="__codelineno-34-5"></a><span class="p">}</span>
-</span><span id="__span-34-6"><a id="__codelineno-34-6" name="__codelineno-34-6"></a>
-</span><span id="__span-34-7"><a id="__codelineno-34-7" name="__codelineno-34-7"></a><span class="c1">// 获取特定 filter key 的摘要</span>
-</span><span id="__span-34-8"><a id="__codelineno-34-8" name="__codelineno-34-8"></a><span class="nx">userSummary</span><span class="p">,</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sessionService</span><span class="p">.</span><span class="nx">GetSessionSummaryText</span><span class="p">(</span>
-</span><span id="__span-34-9"><a id="__codelineno-34-9" name="__codelineno-34-9"></a><span class="w">    </span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">sess</span><span class="p">,</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">WithSummaryFilterKey</span><span class="p">(</span><span class="s">&quot;user-messages&quot;</span><span class="p">),</span>
-</span><span id="__span-34-10"><a id="__codelineno-34-10" name="__codelineno-34-10"></a><span class="p">)</span>
-</span><span id="__span-34-11"><a id="__codelineno-34-11" name="__codelineno-34-11"></a><span class="k">if</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-34-12"><a id="__codelineno-34-12" name="__codelineno-34-12"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;用户消息摘要: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">userSummary</span><span class="p">)</span>
-</span><span id="__span-34-13"><a id="__codelineno-34-13" name="__codelineno-34-13"></a><span class="p">}</span>
-</span></code></pre></div></td></tr></table></div>
-<p><strong>Filter Key 支持</strong>：</p>
-<ul>
-<li>不提供选项时，返回全量会话摘要（<code>SummaryFilterKeyAllContents</code>）</li>
-<li>提供特定 filter key 但未找到时，回退到全量会话摘要</li>
-<li>如果都不存在，兜底返回任意可用的摘要</li>
-</ul>
-<h2 id="_23">按事件类型生成摘要</h2>
-<p>在实际应用中，你可能希望为不同类型的事件生成独立的摘要。</p>
-<h3 id="appendeventhook-filterkey">使用 AppendEventHook 设置 FilterKey</h3>
 <div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-35-1"> 1</a></span>
 <span class="normal"><a href="#__codelineno-35-2"> 2</a></span>
 <span class="normal"><a href="#__codelineno-35-3"> 3</a></span>
@@ -5309,60 +5371,73 @@ request，用来检查历史大 <code>tool result</code> 是否按预期被替�
 <span class="normal"><a href="#__codelineno-35-10">10</a></span>
 <span class="normal"><a href="#__codelineno-35-11">11</a></span>
 <span class="normal"><a href="#__codelineno-35-12">12</a></span>
-<span class="normal"><a href="#__codelineno-35-13">13</a></span>
-<span class="normal"><a href="#__codelineno-35-14">14</a></span>
-<span class="normal"><a href="#__codelineno-35-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="nx">sessionService</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">NewSessionService</span><span class="p">(</span>
-</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2"></a><span class="w">    </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithAppendEventHook</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="o">*</span><span class="nx">session</span><span class="p">.</span><span class="nx">AppendEventContext</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3"></a><span class="w">        </span><span class="c1">// 根据事件作者自动分类</span>
-</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4"></a><span class="w">        </span><span class="nx">prefix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;my-app/&quot;</span><span class="w">  </span><span class="c1">// 必须添加 appName 前缀</span>
-</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5"></a><span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">Author</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="p">:</span>
-</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7"></a><span class="w">            </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">FilterKey</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">prefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;user-messages&quot;</span>
-</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;tool&quot;</span><span class="p">:</span>
-</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9"></a><span class="w">            </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">FilterKey</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">prefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;tool-calls&quot;</span>
-</span><span id="__span-35-10"><a id="__codelineno-35-10" name="__codelineno-35-10"></a><span class="w">        </span><span class="k">default</span><span class="p">:</span>
-</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11"></a><span class="w">            </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">FilterKey</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">prefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;misc&quot;</span>
-</span><span id="__span-35-12"><a id="__codelineno-35-12" name="__codelineno-35-12"></a><span class="w">        </span><span class="p">}</span>
-</span><span id="__span-35-13"><a id="__codelineno-35-13" name="__codelineno-35-13"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">next</span><span class="p">()</span>
-</span><span id="__span-35-14"><a id="__codelineno-35-14" name="__codelineno-35-14"></a><span class="w">    </span><span class="p">}),</span>
-</span><span id="__span-35-15"><a id="__codelineno-35-15" name="__codelineno-35-15"></a><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-35-13">13</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-35-1"><a id="__codelineno-35-1" name="__codelineno-35-1"></a><span class="c1">// 获取完整会话摘要（默认）</span>
+</span><span id="__span-35-2"><a id="__codelineno-35-2" name="__codelineno-35-2"></a><span class="nx">summaryText</span><span class="p">,</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sessionService</span><span class="p">.</span><span class="nx">GetSessionSummaryText</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">sess</span><span class="p">)</span>
+</span><span id="__span-35-3"><a id="__codelineno-35-3" name="__codelineno-35-3"></a><span class="k">if</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-35-4"><a id="__codelineno-35-4" name="__codelineno-35-4"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;摘要: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">summaryText</span><span class="p">)</span>
+</span><span id="__span-35-5"><a id="__codelineno-35-5" name="__codelineno-35-5"></a><span class="p">}</span>
+</span><span id="__span-35-6"><a id="__codelineno-35-6" name="__codelineno-35-6"></a>
+</span><span id="__span-35-7"><a id="__codelineno-35-7" name="__codelineno-35-7"></a><span class="c1">// 获取特定 filter key 的摘要</span>
+</span><span id="__span-35-8"><a id="__codelineno-35-8" name="__codelineno-35-8"></a><span class="nx">userSummary</span><span class="p">,</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sessionService</span><span class="p">.</span><span class="nx">GetSessionSummaryText</span><span class="p">(</span>
+</span><span id="__span-35-9"><a id="__codelineno-35-9" name="__codelineno-35-9"></a><span class="w">    </span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">sess</span><span class="p">,</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">WithSummaryFilterKey</span><span class="p">(</span><span class="s">&quot;user-messages&quot;</span><span class="p">),</span>
+</span><span id="__span-35-10"><a id="__codelineno-35-10" name="__codelineno-35-10"></a><span class="p">)</span>
+</span><span id="__span-35-11"><a id="__codelineno-35-11" name="__codelineno-35-11"></a><span class="k">if</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-35-12"><a id="__codelineno-35-12" name="__codelineno-35-12"></a><span class="w">    </span><span class="nx">fmt</span><span class="p">.</span><span class="nx">Printf</span><span class="p">(</span><span class="s">&quot;用户消息摘要: %s\n&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">userSummary</span><span class="p">)</span>
+</span><span id="__span-35-13"><a id="__codelineno-35-13" name="__codelineno-35-13"></a><span class="p">}</span>
+</span></code></pre></div></td></tr></table></div>
+<p><strong>Filter Key 支持</strong>：</p>
+<ul>
+<li>不提供选项时，返回全量会话摘要（<code>SummaryFilterKeyAllContents</code>）</li>
+<li>提供特定 filter key 但未找到时，回退到全量会话摘要</li>
+<li>如果都不存在，兜底返回任意可用的摘要</li>
+</ul>
+<h2 id="_23">按事件类型生成摘要</h2>
+<p>在实际应用中，你可能希望为不同类型的事件生成独立的摘要。</p>
+<h3 id="appendeventhook-filterkey">使用 AppendEventHook 设置 FilterKey</h3>
+<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-36-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-36-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-36-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-36-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-36-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-36-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-36-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-36-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-36-10">10</a></span>
+<span class="normal"><a href="#__codelineno-36-11">11</a></span>
+<span class="normal"><a href="#__codelineno-36-12">12</a></span>
+<span class="normal"><a href="#__codelineno-36-13">13</a></span>
+<span class="normal"><a href="#__codelineno-36-14">14</a></span>
+<span class="normal"><a href="#__codelineno-36-15">15</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1"></a><span class="nx">sessionService</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">NewSessionService</span><span class="p">(</span>
+</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2"></a><span class="w">    </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithAppendEventHook</span><span class="p">(</span><span class="kd">func</span><span class="p">(</span><span class="nx">ctx</span><span class="w"> </span><span class="o">*</span><span class="nx">session</span><span class="p">.</span><span class="nx">AppendEventContext</span><span class="p">,</span><span class="w"> </span><span class="nx">next</span><span class="w"> </span><span class="kd">func</span><span class="p">()</span><span class="w"> </span><span class="kt">error</span><span class="p">)</span><span class="w"> </span><span class="kt">error</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3"></a><span class="w">        </span><span class="c1">// 根据事件作者自动分类</span>
+</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4"></a><span class="w">        </span><span class="nx">prefix</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="s">&quot;my-app/&quot;</span><span class="w">  </span><span class="c1">// 必须添加 appName 前缀</span>
+</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5"></a><span class="w">        </span><span class="k">switch</span><span class="w"> </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">Author</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-36-6"><a id="__codelineno-36-6" name="__codelineno-36-6"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;user&quot;</span><span class="p">:</span>
+</span><span id="__span-36-7"><a id="__codelineno-36-7" name="__codelineno-36-7"></a><span class="w">            </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">FilterKey</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">prefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;user-messages&quot;</span>
+</span><span id="__span-36-8"><a id="__codelineno-36-8" name="__codelineno-36-8"></a><span class="w">        </span><span class="k">case</span><span class="w"> </span><span class="s">&quot;tool&quot;</span><span class="p">:</span>
+</span><span id="__span-36-9"><a id="__codelineno-36-9" name="__codelineno-36-9"></a><span class="w">            </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">FilterKey</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">prefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;tool-calls&quot;</span>
+</span><span id="__span-36-10"><a id="__codelineno-36-10" name="__codelineno-36-10"></a><span class="w">        </span><span class="k">default</span><span class="p">:</span>
+</span><span id="__span-36-11"><a id="__codelineno-36-11" name="__codelineno-36-11"></a><span class="w">            </span><span class="nx">ctx</span><span class="p">.</span><span class="nx">Event</span><span class="p">.</span><span class="nx">FilterKey</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">prefix</span><span class="w"> </span><span class="o">+</span><span class="w"> </span><span class="s">&quot;misc&quot;</span>
+</span><span id="__span-36-12"><a id="__codelineno-36-12" name="__codelineno-36-12"></a><span class="w">        </span><span class="p">}</span>
+</span><span id="__span-36-13"><a id="__codelineno-36-13" name="__codelineno-36-13"></a><span class="w">        </span><span class="k">return</span><span class="w"> </span><span class="nx">next</span><span class="p">()</span>
+</span><span id="__span-36-14"><a id="__codelineno-36-14" name="__codelineno-36-14"></a><span class="w">    </span><span class="p">}),</span>
+</span><span id="__span-36-15"><a id="__codelineno-36-15" name="__codelineno-36-15"></a><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <h3 id="filterkey">FilterKey 前缀规范</h3>
 <p><strong>⚠️ 重要：FilterKey 必须添加 <code>appName + "/"</code> 前缀。</strong></p>
 <p><strong>原因</strong>：Runner 在过滤事件时使用 <code>appName + "/"</code> 作为过滤前缀，如果 FilterKey 没有这个前缀，事件会被过滤掉。</p>
-<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-36-1">1</a></span>
-<span class="normal"><a href="#__codelineno-36-2">2</a></span>
-<span class="normal"><a href="#__codelineno-36-3">3</a></span>
-<span class="normal"><a href="#__codelineno-36-4">4</a></span>
-<span class="normal"><a href="#__codelineno-36-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-36-1"><a id="__codelineno-36-1" name="__codelineno-36-1"></a><span class="c1">// ✅ 正确：带 appName 前缀</span>
-</span><span id="__span-36-2"><a id="__codelineno-36-2" name="__codelineno-36-2"></a><span class="nx">evt</span><span class="p">.</span><span class="nx">FilterKey</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;my-app/user-messages&quot;</span>
-</span><span id="__span-36-3"><a id="__codelineno-36-3" name="__codelineno-36-3"></a>
-</span><span id="__span-36-4"><a id="__codelineno-36-4" name="__codelineno-36-4"></a><span class="c1">// ❌ 错误：没有前缀，事件会被过滤掉</span>
-</span><span id="__span-36-5"><a id="__codelineno-36-5" name="__codelineno-36-5"></a><span class="nx">evt</span><span class="p">.</span><span class="nx">FilterKey</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;user-messages&quot;</span>
-</span></code></pre></div></td></tr></table></div>
-<h3 id="_24">为不同类型生成摘要</h3>
 <div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-37-1">1</a></span>
 <span class="normal"><a href="#__codelineno-37-2">2</a></span>
 <span class="normal"><a href="#__codelineno-37-3">3</a></span>
 <span class="normal"><a href="#__codelineno-37-4">4</a></span>
-<span class="normal"><a href="#__codelineno-37-5">5</a></span>
-<span class="normal"><a href="#__codelineno-37-6">6</a></span>
-<span class="normal"><a href="#__codelineno-37-7">7</a></span>
-<span class="normal"><a href="#__codelineno-37-8">8</a></span>
-<span class="normal"><a href="#__codelineno-37-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="c1">// 为用户消息生成摘要</span>
-</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sessionService</span><span class="p">.</span><span class="nx">CreateSessionSummary</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">sess</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;my-app/user-messages&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-37-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-37-1"><a id="__codelineno-37-1" name="__codelineno-37-1"></a><span class="c1">// ✅ 正确：带 appName 前缀</span>
+</span><span id="__span-37-2"><a id="__codelineno-37-2" name="__codelineno-37-2"></a><span class="nx">evt</span><span class="p">.</span><span class="nx">FilterKey</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;my-app/user-messages&quot;</span>
 </span><span id="__span-37-3"><a id="__codelineno-37-3" name="__codelineno-37-3"></a>
-</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="c1">// 为工具调用生成摘要</span>
-</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5"></a><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sessionService</span><span class="p">.</span><span class="nx">CreateSessionSummary</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">sess</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;my-app/tool-calls&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
-</span><span id="__span-37-6"><a id="__codelineno-37-6" name="__codelineno-37-6"></a>
-</span><span id="__span-37-7"><a id="__codelineno-37-7" name="__codelineno-37-7"></a><span class="c1">// 获取特定类型的摘要</span>
-</span><span id="__span-37-8"><a id="__codelineno-37-8" name="__codelineno-37-8"></a><span class="nx">userSummary</span><span class="p">,</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sessionService</span><span class="p">.</span><span class="nx">GetSessionSummaryText</span><span class="p">(</span>
-</span><span id="__span-37-9"><a id="__codelineno-37-9" name="__codelineno-37-9"></a><span class="w">    </span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">sess</span><span class="p">,</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">WithSummaryFilterKey</span><span class="p">(</span><span class="s">&quot;my-app/user-messages&quot;</span><span class="p">))</span>
+</span><span id="__span-37-4"><a id="__codelineno-37-4" name="__codelineno-37-4"></a><span class="c1">// ❌ 错误：没有前缀，事件会被过滤掉</span>
+</span><span id="__span-37-5"><a id="__codelineno-37-5" name="__codelineno-37-5"></a><span class="nx">evt</span><span class="p">.</span><span class="nx">FilterKey</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="s">&quot;user-messages&quot;</span>
 </span></code></pre></div></td></tr></table></div>
-<h3 id="_25">限制摘要目标</h3>
-<p>默认情况下，当某个非空分支 <code>FilterKey</code> 触发摘要时，session service 会同时
-刷新该分支摘要和全量会话摘要（<code>SummaryFilterKeyAllContents</code>）。如果某些分支
-不需要摘要，可以通过 allowlist 控制范围，并按需关闭全量摘要级联：</p>
+<h3 id="_24">为不同类型生成摘要</h3>
 <div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-38-1">1</a></span>
 <span class="normal"><a href="#__codelineno-38-2">2</a></span>
 <span class="normal"><a href="#__codelineno-38-3">3</a></span>
@@ -5370,14 +5445,36 @@ request，用来检查历史大 <code>tool result</code> 是否按预期被替�
 <span class="normal"><a href="#__codelineno-38-5">5</a></span>
 <span class="normal"><a href="#__codelineno-38-6">6</a></span>
 <span class="normal"><a href="#__codelineno-38-7">7</a></span>
-<span class="normal"><a href="#__codelineno-38-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1"></a><span class="nx">sessionService</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">NewSessionService</span><span class="p">(</span>
-</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2"></a><span class="w">    </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithSummarizer</span><span class="p">(</span><span class="nx">summarizer</span><span class="p">),</span>
-</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3"></a><span class="w">    </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithSummaryFilterAllowlist</span><span class="p">(</span>
-</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4"></a><span class="w">        </span><span class="s">&quot;my-app/user-messages&quot;</span><span class="p">,</span>
-</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5"></a><span class="w">        </span><span class="s">&quot;my-app/tool-calls&quot;</span><span class="p">,</span>
-</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6"></a><span class="w">    </span><span class="p">),</span>
-</span><span id="__span-38-7"><a id="__codelineno-38-7" name="__codelineno-38-7"></a><span class="w">    </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithCascadeFullSessionSummary</span><span class="p">(</span><span class="kc">false</span><span class="p">),</span>
-</span><span id="__span-38-8"><a id="__codelineno-38-8" name="__codelineno-38-8"></a><span class="p">)</span>
+<span class="normal"><a href="#__codelineno-38-8">8</a></span>
+<span class="normal"><a href="#__codelineno-38-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-38-1"><a id="__codelineno-38-1" name="__codelineno-38-1"></a><span class="c1">// 为用户消息生成摘要</span>
+</span><span id="__span-38-2"><a id="__codelineno-38-2" name="__codelineno-38-2"></a><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sessionService</span><span class="p">.</span><span class="nx">CreateSessionSummary</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">sess</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;my-app/user-messages&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+</span><span id="__span-38-3"><a id="__codelineno-38-3" name="__codelineno-38-3"></a>
+</span><span id="__span-38-4"><a id="__codelineno-38-4" name="__codelineno-38-4"></a><span class="c1">// 为工具调用生成摘要</span>
+</span><span id="__span-38-5"><a id="__codelineno-38-5" name="__codelineno-38-5"></a><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sessionService</span><span class="p">.</span><span class="nx">CreateSessionSummary</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">sess</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;my-app/tool-calls&quot;</span><span class="p">,</span><span class="w"> </span><span class="kc">false</span><span class="p">)</span>
+</span><span id="__span-38-6"><a id="__codelineno-38-6" name="__codelineno-38-6"></a>
+</span><span id="__span-38-7"><a id="__codelineno-38-7" name="__codelineno-38-7"></a><span class="c1">// 获取特定类型的摘要</span>
+</span><span id="__span-38-8"><a id="__codelineno-38-8" name="__codelineno-38-8"></a><span class="nx">userSummary</span><span class="p">,</span><span class="w"> </span><span class="nx">found</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">sessionService</span><span class="p">.</span><span class="nx">GetSessionSummaryText</span><span class="p">(</span>
+</span><span id="__span-38-9"><a id="__codelineno-38-9" name="__codelineno-38-9"></a><span class="w">    </span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="nx">sess</span><span class="p">,</span><span class="w"> </span><span class="nx">session</span><span class="p">.</span><span class="nx">WithSummaryFilterKey</span><span class="p">(</span><span class="s">&quot;my-app/user-messages&quot;</span><span class="p">))</span>
+</span></code></pre></div></td></tr></table></div>
+<h3 id="_25">限制摘要目标</h3>
+<p>默认情况下，当某个非空分支 <code>FilterKey</code> 触发摘要时，session service 会同时
+刷新该分支摘要和全量会话摘要（<code>SummaryFilterKeyAllContents</code>）。如果某些分支
+不需要摘要，可以通过 allowlist 控制范围，并按需关闭全量摘要级联：</p>
+<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span>
+<span class="normal"><a href="#__codelineno-39-2">2</a></span>
+<span class="normal"><a href="#__codelineno-39-3">3</a></span>
+<span class="normal"><a href="#__codelineno-39-4">4</a></span>
+<span class="normal"><a href="#__codelineno-39-5">5</a></span>
+<span class="normal"><a href="#__codelineno-39-6">6</a></span>
+<span class="normal"><a href="#__codelineno-39-7">7</a></span>
+<span class="normal"><a href="#__codelineno-39-8">8</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1"></a><span class="nx">sessionService</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">NewSessionService</span><span class="p">(</span>
+</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2"></a><span class="w">    </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithSummarizer</span><span class="p">(</span><span class="nx">summarizer</span><span class="p">),</span>
+</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3"></a><span class="w">    </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithSummaryFilterAllowlist</span><span class="p">(</span>
+</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4"></a><span class="w">        </span><span class="s">&quot;my-app/user-messages&quot;</span><span class="p">,</span>
+</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5"></a><span class="w">        </span><span class="s">&quot;my-app/tool-calls&quot;</span><span class="p">,</span>
+</span><span id="__span-39-6"><a id="__codelineno-39-6" name="__codelineno-39-6"></a><span class="w">    </span><span class="p">),</span>
+</span><span id="__span-39-7"><a id="__codelineno-39-7" name="__codelineno-39-7"></a><span class="w">    </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithCascadeFullSessionSummary</span><span class="p">(</span><span class="kc">false</span><span class="p">),</span>
+</span><span id="__span-39-8"><a id="__codelineno-39-8" name="__codelineno-39-8"></a><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <p>行为说明：</p>
 <ul>
@@ -5388,15 +5485,15 @@ request，用来检查历史大 <code>tool result</code> 是否按预期被替�
 <li>如果只想保留 branch 触发出来的全量摘要，不写任何 branch 摘要，可以显式传入
   空 allowlist，并保持默认 cascade 开启：</li>
 </ul>
-<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-39-1">1</a></span>
-<span class="normal"><a href="#__codelineno-39-2">2</a></span>
-<span class="normal"><a href="#__codelineno-39-3">3</a></span>
-<span class="normal"><a href="#__codelineno-39-4">4</a></span>
-<span class="normal"><a href="#__codelineno-39-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-39-1"><a id="__codelineno-39-1" name="__codelineno-39-1"></a><span class="nx">sessionService</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mysql</span><span class="p">.</span><span class="nx">NewService</span><span class="p">(</span>
-</span><span id="__span-39-2"><a id="__codelineno-39-2" name="__codelineno-39-2"></a><span class="w">    </span><span class="nx">mysql</span><span class="p">.</span><span class="nx">WithMySQLClientDSN</span><span class="p">(</span><span class="nx">dsn</span><span class="p">),</span>
-</span><span id="__span-39-3"><a id="__codelineno-39-3" name="__codelineno-39-3"></a><span class="w">    </span><span class="nx">mysql</span><span class="p">.</span><span class="nx">WithSummarizer</span><span class="p">(</span><span class="nx">summarizer</span><span class="p">),</span>
-</span><span id="__span-39-4"><a id="__codelineno-39-4" name="__codelineno-39-4"></a><span class="w">    </span><span class="nx">mysql</span><span class="p">.</span><span class="nx">WithSummaryFilterAllowlist</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">),</span>
-</span><span id="__span-39-5"><a id="__codelineno-39-5" name="__codelineno-39-5"></a><span class="p">)</span>
+<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1">1</a></span>
+<span class="normal"><a href="#__codelineno-40-2">2</a></span>
+<span class="normal"><a href="#__codelineno-40-3">3</a></span>
+<span class="normal"><a href="#__codelineno-40-4">4</a></span>
+<span class="normal"><a href="#__codelineno-40-5">5</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1"></a><span class="nx">sessionService</span><span class="p">,</span><span class="w"> </span><span class="nx">err</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">mysql</span><span class="p">.</span><span class="nx">NewService</span><span class="p">(</span>
+</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2"></a><span class="w">    </span><span class="nx">mysql</span><span class="p">.</span><span class="nx">WithMySQLClientDSN</span><span class="p">(</span><span class="nx">dsn</span><span class="p">),</span>
+</span><span id="__span-40-3"><a id="__codelineno-40-3" name="__codelineno-40-3"></a><span class="w">    </span><span class="nx">mysql</span><span class="p">.</span><span class="nx">WithSummarizer</span><span class="p">(</span><span class="nx">summarizer</span><span class="p">),</span>
+</span><span id="__span-40-4"><a id="__codelineno-40-4" name="__codelineno-40-4"></a><span class="w">    </span><span class="nx">mysql</span><span class="p">.</span><span class="nx">WithSummaryFilterAllowlist</span><span class="p">(</span><span class="s">&quot;&quot;</span><span class="p">),</span>
+</span><span id="__span-40-5"><a id="__codelineno-40-5" name="__codelineno-40-5"></a><span class="p">)</span>
 </span></code></pre></div></td></tr></table></div>
 <ul>
 <li><code>mysql.WithSummaryFilterAllowlist("")</code> 和
@@ -5446,125 +5543,125 @@ request，用来检查历史大 <code>tool result</code> 是否按预期被替�
 </ul>
 <h2 id="_29">完整示例</h2>
 <p>以下是演示所有组件如何协同工作的完整示例：</p>
-<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-40-1"> 1</a></span>
-<span class="normal"><a href="#__codelineno-40-2"> 2</a></span>
-<span class="normal"><a href="#__codelineno-40-3"> 3</a></span>
-<span class="normal"><a href="#__codelineno-40-4"> 4</a></span>
-<span class="normal"><a href="#__codelineno-40-5"> 5</a></span>
-<span class="normal"><a href="#__codelineno-40-6"> 6</a></span>
-<span class="normal"><a href="#__codelineno-40-7"> 7</a></span>
-<span class="normal"><a href="#__codelineno-40-8"> 8</a></span>
-<span class="normal"><a href="#__codelineno-40-9"> 9</a></span>
-<span class="normal"><a href="#__codelineno-40-10">10</a></span>
-<span class="normal"><a href="#__codelineno-40-11">11</a></span>
-<span class="normal"><a href="#__codelineno-40-12">12</a></span>
-<span class="normal"><a href="#__codelineno-40-13">13</a></span>
-<span class="normal"><a href="#__codelineno-40-14">14</a></span>
-<span class="normal"><a href="#__codelineno-40-15">15</a></span>
-<span class="normal"><a href="#__codelineno-40-16">16</a></span>
-<span class="normal"><a href="#__codelineno-40-17">17</a></span>
-<span class="normal"><a href="#__codelineno-40-18">18</a></span>
-<span class="normal"><a href="#__codelineno-40-19">19</a></span>
-<span class="normal"><a href="#__codelineno-40-20">20</a></span>
-<span class="normal"><a href="#__codelineno-40-21">21</a></span>
-<span class="normal"><a href="#__codelineno-40-22">22</a></span>
-<span class="normal"><a href="#__codelineno-40-23">23</a></span>
-<span class="normal"><a href="#__codelineno-40-24">24</a></span>
-<span class="normal"><a href="#__codelineno-40-25">25</a></span>
-<span class="normal"><a href="#__codelineno-40-26">26</a></span>
-<span class="normal"><a href="#__codelineno-40-27">27</a></span>
-<span class="normal"><a href="#__codelineno-40-28">28</a></span>
-<span class="normal"><a href="#__codelineno-40-29">29</a></span>
-<span class="normal"><a href="#__codelineno-40-30">30</a></span>
-<span class="normal"><a href="#__codelineno-40-31">31</a></span>
-<span class="normal"><a href="#__codelineno-40-32">32</a></span>
-<span class="normal"><a href="#__codelineno-40-33">33</a></span>
-<span class="normal"><a href="#__codelineno-40-34">34</a></span>
-<span class="normal"><a href="#__codelineno-40-35">35</a></span>
-<span class="normal"><a href="#__codelineno-40-36">36</a></span>
-<span class="normal"><a href="#__codelineno-40-37">37</a></span>
-<span class="normal"><a href="#__codelineno-40-38">38</a></span>
-<span class="normal"><a href="#__codelineno-40-39">39</a></span>
-<span class="normal"><a href="#__codelineno-40-40">40</a></span>
-<span class="normal"><a href="#__codelineno-40-41">41</a></span>
-<span class="normal"><a href="#__codelineno-40-42">42</a></span>
-<span class="normal"><a href="#__codelineno-40-43">43</a></span>
-<span class="normal"><a href="#__codelineno-40-44">44</a></span>
-<span class="normal"><a href="#__codelineno-40-45">45</a></span>
-<span class="normal"><a href="#__codelineno-40-46">46</a></span>
-<span class="normal"><a href="#__codelineno-40-47">47</a></span>
-<span class="normal"><a href="#__codelineno-40-48">48</a></span>
-<span class="normal"><a href="#__codelineno-40-49">49</a></span>
-<span class="normal"><a href="#__codelineno-40-50">50</a></span>
-<span class="normal"><a href="#__codelineno-40-51">51</a></span>
-<span class="normal"><a href="#__codelineno-40-52">52</a></span>
-<span class="normal"><a href="#__codelineno-40-53">53</a></span>
-<span class="normal"><a href="#__codelineno-40-54">54</a></span>
-<span class="normal"><a href="#__codelineno-40-55">55</a></span>
-<span class="normal"><a href="#__codelineno-40-56">56</a></span>
-<span class="normal"><a href="#__codelineno-40-57">57</a></span>
-<span class="normal"><a href="#__codelineno-40-58">58</a></span>
-<span class="normal"><a href="#__codelineno-40-59">59</a></span>
-<span class="normal"><a href="#__codelineno-40-60">60</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-40-1"><a id="__codelineno-40-1" name="__codelineno-40-1"></a><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
-</span><span id="__span-40-2"><a id="__codelineno-40-2" name="__codelineno-40-2"></a>
-</span><span id="__span-40-3"><a id="__codelineno-40-3" name="__codelineno-40-3"></a><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
-</span><span id="__span-40-4"><a id="__codelineno-40-4" name="__codelineno-40-4"></a><span class="w">    </span><span class="s">&quot;context&quot;</span>
-</span><span id="__span-40-5"><a id="__codelineno-40-5" name="__codelineno-40-5"></a><span class="w">    </span><span class="s">&quot;time&quot;</span>
-</span><span id="__span-40-6"><a id="__codelineno-40-6" name="__codelineno-40-6"></a>
-</span><span id="__span-40-7"><a id="__codelineno-40-7" name="__codelineno-40-7"></a><span class="w">    </span><span class="s">&quot;trpc.group/trpc-go/trpc-agent-go/agent/llmagent&quot;</span>
-</span><span id="__span-40-8"><a id="__codelineno-40-8" name="__codelineno-40-8"></a><span class="w">    </span><span class="s">&quot;trpc.group/trpc-go/trpc-agent-go/model&quot;</span>
-</span><span id="__span-40-9"><a id="__codelineno-40-9" name="__codelineno-40-9"></a><span class="w">    </span><span class="s">&quot;trpc.group/trpc-go/trpc-agent-go/model/openai&quot;</span>
-</span><span id="__span-40-10"><a id="__codelineno-40-10" name="__codelineno-40-10"></a><span class="w">    </span><span class="s">&quot;trpc.group/trpc-go/trpc-agent-go/runner&quot;</span>
-</span><span id="__span-40-11"><a id="__codelineno-40-11" name="__codelineno-40-11"></a><span class="w">    </span><span class="s">&quot;trpc.group/trpc-go/trpc-agent-go/session/inmemory&quot;</span>
-</span><span id="__span-40-12"><a id="__codelineno-40-12" name="__codelineno-40-12"></a><span class="w">    </span><span class="s">&quot;trpc.group/trpc-go/trpc-agent-go/session/summary&quot;</span>
-</span><span id="__span-40-13"><a id="__codelineno-40-13" name="__codelineno-40-13"></a><span class="p">)</span>
-</span><span id="__span-40-14"><a id="__codelineno-40-14" name="__codelineno-40-14"></a>
-</span><span id="__span-40-15"><a id="__codelineno-40-15" name="__codelineno-40-15"></a><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-40-16"><a id="__codelineno-40-16" name="__codelineno-40-16"></a><span class="w">    </span><span class="nx">ctx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">()</span>
-</span><span id="__span-40-17"><a id="__codelineno-40-17" name="__codelineno-40-17"></a>
-</span><span id="__span-40-18"><a id="__codelineno-40-18" name="__codelineno-40-18"></a><span class="w">    </span><span class="c1">// Create LLM model for chat and summary</span>
-</span><span id="__span-40-19"><a id="__codelineno-40-19" name="__codelineno-40-19"></a><span class="w">    </span><span class="nx">llm</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openai</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;gpt-4&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">openai</span><span class="p">.</span><span class="nx">WithAPIKey</span><span class="p">(</span><span class="s">&quot;your-api-key&quot;</span><span class="p">))</span>
-</span><span id="__span-40-20"><a id="__codelineno-40-20" name="__codelineno-40-20"></a>
-</span><span id="__span-40-21"><a id="__codelineno-40-21" name="__codelineno-40-21"></a><span class="w">    </span><span class="c1">// Create summarizer with flexible trigger conditions</span>
-</span><span id="__span-40-22"><a id="__codelineno-40-22" name="__codelineno-40-22"></a><span class="w">    </span><span class="nx">summarizer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">summary</span><span class="p">.</span><span class="nx">NewSummarizer</span><span class="p">(</span>
-</span><span id="__span-40-23"><a id="__codelineno-40-23" name="__codelineno-40-23"></a><span class="w">        </span><span class="nx">llm</span><span class="p">,</span>
-</span><span id="__span-40-24"><a id="__codelineno-40-24" name="__codelineno-40-24"></a><span class="w">        </span><span class="nx">summary</span><span class="p">.</span><span class="nx">WithMaxSummaryWords</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
-</span><span id="__span-40-25"><a id="__codelineno-40-25" name="__codelineno-40-25"></a><span class="w">        </span><span class="nx">summary</span><span class="p">.</span><span class="nx">WithChecksAny</span><span class="p">(</span>
-</span><span id="__span-40-26"><a id="__codelineno-40-26" name="__codelineno-40-26"></a><span class="w">            </span><span class="nx">summary</span><span class="p">.</span><span class="nx">CheckEventThreshold</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
-</span><span id="__span-40-27"><a id="__codelineno-40-27" name="__codelineno-40-27"></a><span class="w">            </span><span class="nx">summary</span><span class="p">.</span><span class="nx">CheckTokenThreshold</span><span class="p">(</span><span class="mi">4000</span><span class="p">),</span>
-</span><span id="__span-40-28"><a id="__codelineno-40-28" name="__codelineno-40-28"></a><span class="w">            </span><span class="nx">summary</span><span class="p">.</span><span class="nx">CheckTimeThreshold</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">),</span><span class="w"> </span><span class="c1">// 在摘要检查时判断；比较被检查 session 的最后一个事件（在增量摘要路径里通常就是最近一个待摘要事件）</span>
-</span><span id="__span-40-29"><a id="__codelineno-40-29" name="__codelineno-40-29"></a><span class="w">        </span><span class="p">),</span>
-</span><span id="__span-40-30"><a id="__codelineno-40-30" name="__codelineno-40-30"></a><span class="w">    </span><span class="p">)</span>
-</span><span id="__span-40-31"><a id="__codelineno-40-31" name="__codelineno-40-31"></a>
-</span><span id="__span-40-32"><a id="__codelineno-40-32" name="__codelineno-40-32"></a><span class="w">    </span><span class="c1">// Create session service with summarizer</span>
-</span><span id="__span-40-33"><a id="__codelineno-40-33" name="__codelineno-40-33"></a><span class="w">    </span><span class="nx">sessionService</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">NewSessionService</span><span class="p">(</span>
-</span><span id="__span-40-34"><a id="__codelineno-40-34" name="__codelineno-40-34"></a><span class="w">        </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithSummarizer</span><span class="p">(</span><span class="nx">summarizer</span><span class="p">),</span>
-</span><span id="__span-40-35"><a id="__codelineno-40-35" name="__codelineno-40-35"></a><span class="w">        </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithAsyncSummaryNum</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
-</span><span id="__span-40-36"><a id="__codelineno-40-36" name="__codelineno-40-36"></a><span class="w">        </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithSummaryQueueSize</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
-</span><span id="__span-40-37"><a id="__codelineno-40-37" name="__codelineno-40-37"></a><span class="w">        </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithSummaryJobTimeout</span><span class="p">(</span><span class="mi">60</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">),</span>
-</span><span id="__span-40-38"><a id="__codelineno-40-38" name="__codelineno-40-38"></a><span class="w">    </span><span class="p">)</span>
-</span><span id="__span-40-39"><a id="__codelineno-40-39" name="__codelineno-40-39"></a>
-</span><span id="__span-40-40"><a id="__codelineno-40-40" name="__codelineno-40-40"></a><span class="w">    </span><span class="c1">// Create agent with summary injection enabled</span>
-</span><span id="__span-40-41"><a id="__codelineno-40-41" name="__codelineno-40-41"></a><span class="w">    </span><span class="nx">agent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span>
-</span><span id="__span-40-42"><a id="__codelineno-40-42" name="__codelineno-40-42"></a><span class="w">        </span><span class="s">&quot;my-agent&quot;</span><span class="p">,</span>
-</span><span id="__span-40-43"><a id="__codelineno-40-43" name="__codelineno-40-43"></a><span class="w">        </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithModel</span><span class="p">(</span><span class="nx">llm</span><span class="p">),</span>
-</span><span id="__span-40-44"><a id="__codelineno-40-44" name="__codelineno-40-44"></a><span class="w">        </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithAddSessionSummary</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
-</span><span id="__span-40-45"><a id="__codelineno-40-45" name="__codelineno-40-45"></a><span class="w">        </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithMaxHistoryRuns</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
-</span><span id="__span-40-46"><a id="__codelineno-40-46" name="__codelineno-40-46"></a><span class="w">    </span><span class="p">)</span>
-</span><span id="__span-40-47"><a id="__codelineno-40-47" name="__codelineno-40-47"></a>
-</span><span id="__span-40-48"><a id="__codelineno-40-48" name="__codelineno-40-48"></a><span class="w">    </span><span class="c1">// Create runner</span>
-</span><span id="__span-40-49"><a id="__codelineno-40-49" name="__codelineno-40-49"></a><span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">runner</span><span class="p">.</span><span class="nx">NewRunner</span><span class="p">(</span><span class="s">&quot;my-app&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">agent</span><span class="p">,</span>
-</span><span id="__span-40-50"><a id="__codelineno-40-50" name="__codelineno-40-50"></a><span class="w">        </span><span class="nx">runner</span><span class="p">.</span><span class="nx">WithSessionService</span><span class="p">(</span><span class="nx">sessionService</span><span class="p">))</span>
-</span><span id="__span-40-51"><a id="__codelineno-40-51" name="__codelineno-40-51"></a>
-</span><span id="__span-40-52"><a id="__codelineno-40-52" name="__codelineno-40-52"></a><span class="w">    </span><span class="c1">// Run conversation - summary will be managed automatically</span>
-</span><span id="__span-40-53"><a id="__codelineno-40-53" name="__codelineno-40-53"></a><span class="w">    </span><span class="nx">userMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewUserMessage</span><span class="p">(</span><span class="s">&quot;Tell me about AI&quot;</span><span class="p">)</span>
-</span><span id="__span-40-54"><a id="__codelineno-40-54" name="__codelineno-40-54"></a><span class="w">    </span><span class="nx">eventChan</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user123&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;session456&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">userMsg</span><span class="p">)</span>
-</span><span id="__span-40-55"><a id="__codelineno-40-55" name="__codelineno-40-55"></a>
-</span><span id="__span-40-56"><a id="__codelineno-40-56" name="__codelineno-40-56"></a><span class="w">    </span><span class="c1">// Consume events</span>
-</span><span id="__span-40-57"><a id="__codelineno-40-57" name="__codelineno-40-57"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">event</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">eventChan</span><span class="w"> </span><span class="p">{</span>
-</span><span id="__span-40-58"><a id="__codelineno-40-58" name="__codelineno-40-58"></a><span class="w">        </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">event</span>
-</span><span id="__span-40-59"><a id="__codelineno-40-59" name="__codelineno-40-59"></a><span class="w">    </span><span class="p">}</span>
-</span><span id="__span-40-60"><a id="__codelineno-40-60" name="__codelineno-40-60"></a><span class="p">}</span>
+<div class="language-go highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-41-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-41-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-41-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-41-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-41-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-41-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-41-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-41-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-41-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-41-10">10</a></span>
+<span class="normal"><a href="#__codelineno-41-11">11</a></span>
+<span class="normal"><a href="#__codelineno-41-12">12</a></span>
+<span class="normal"><a href="#__codelineno-41-13">13</a></span>
+<span class="normal"><a href="#__codelineno-41-14">14</a></span>
+<span class="normal"><a href="#__codelineno-41-15">15</a></span>
+<span class="normal"><a href="#__codelineno-41-16">16</a></span>
+<span class="normal"><a href="#__codelineno-41-17">17</a></span>
+<span class="normal"><a href="#__codelineno-41-18">18</a></span>
+<span class="normal"><a href="#__codelineno-41-19">19</a></span>
+<span class="normal"><a href="#__codelineno-41-20">20</a></span>
+<span class="normal"><a href="#__codelineno-41-21">21</a></span>
+<span class="normal"><a href="#__codelineno-41-22">22</a></span>
+<span class="normal"><a href="#__codelineno-41-23">23</a></span>
+<span class="normal"><a href="#__codelineno-41-24">24</a></span>
+<span class="normal"><a href="#__codelineno-41-25">25</a></span>
+<span class="normal"><a href="#__codelineno-41-26">26</a></span>
+<span class="normal"><a href="#__codelineno-41-27">27</a></span>
+<span class="normal"><a href="#__codelineno-41-28">28</a></span>
+<span class="normal"><a href="#__codelineno-41-29">29</a></span>
+<span class="normal"><a href="#__codelineno-41-30">30</a></span>
+<span class="normal"><a href="#__codelineno-41-31">31</a></span>
+<span class="normal"><a href="#__codelineno-41-32">32</a></span>
+<span class="normal"><a href="#__codelineno-41-33">33</a></span>
+<span class="normal"><a href="#__codelineno-41-34">34</a></span>
+<span class="normal"><a href="#__codelineno-41-35">35</a></span>
+<span class="normal"><a href="#__codelineno-41-36">36</a></span>
+<span class="normal"><a href="#__codelineno-41-37">37</a></span>
+<span class="normal"><a href="#__codelineno-41-38">38</a></span>
+<span class="normal"><a href="#__codelineno-41-39">39</a></span>
+<span class="normal"><a href="#__codelineno-41-40">40</a></span>
+<span class="normal"><a href="#__codelineno-41-41">41</a></span>
+<span class="normal"><a href="#__codelineno-41-42">42</a></span>
+<span class="normal"><a href="#__codelineno-41-43">43</a></span>
+<span class="normal"><a href="#__codelineno-41-44">44</a></span>
+<span class="normal"><a href="#__codelineno-41-45">45</a></span>
+<span class="normal"><a href="#__codelineno-41-46">46</a></span>
+<span class="normal"><a href="#__codelineno-41-47">47</a></span>
+<span class="normal"><a href="#__codelineno-41-48">48</a></span>
+<span class="normal"><a href="#__codelineno-41-49">49</a></span>
+<span class="normal"><a href="#__codelineno-41-50">50</a></span>
+<span class="normal"><a href="#__codelineno-41-51">51</a></span>
+<span class="normal"><a href="#__codelineno-41-52">52</a></span>
+<span class="normal"><a href="#__codelineno-41-53">53</a></span>
+<span class="normal"><a href="#__codelineno-41-54">54</a></span>
+<span class="normal"><a href="#__codelineno-41-55">55</a></span>
+<span class="normal"><a href="#__codelineno-41-56">56</a></span>
+<span class="normal"><a href="#__codelineno-41-57">57</a></span>
+<span class="normal"><a href="#__codelineno-41-58">58</a></span>
+<span class="normal"><a href="#__codelineno-41-59">59</a></span>
+<span class="normal"><a href="#__codelineno-41-60">60</a></span></pre></div></td><td class="code"><div><pre><span></span><code><span id="__span-41-1"><a id="__codelineno-41-1" name="__codelineno-41-1"></a><span class="kn">package</span><span class="w"> </span><span class="nx">main</span>
+</span><span id="__span-41-2"><a id="__codelineno-41-2" name="__codelineno-41-2"></a>
+</span><span id="__span-41-3"><a id="__codelineno-41-3" name="__codelineno-41-3"></a><span class="kn">import</span><span class="w"> </span><span class="p">(</span>
+</span><span id="__span-41-4"><a id="__codelineno-41-4" name="__codelineno-41-4"></a><span class="w">    </span><span class="s">&quot;context&quot;</span>
+</span><span id="__span-41-5"><a id="__codelineno-41-5" name="__codelineno-41-5"></a><span class="w">    </span><span class="s">&quot;time&quot;</span>
+</span><span id="__span-41-6"><a id="__codelineno-41-6" name="__codelineno-41-6"></a>
+</span><span id="__span-41-7"><a id="__codelineno-41-7" name="__codelineno-41-7"></a><span class="w">    </span><span class="s">&quot;trpc.group/trpc-go/trpc-agent-go/agent/llmagent&quot;</span>
+</span><span id="__span-41-8"><a id="__codelineno-41-8" name="__codelineno-41-8"></a><span class="w">    </span><span class="s">&quot;trpc.group/trpc-go/trpc-agent-go/model&quot;</span>
+</span><span id="__span-41-9"><a id="__codelineno-41-9" name="__codelineno-41-9"></a><span class="w">    </span><span class="s">&quot;trpc.group/trpc-go/trpc-agent-go/model/openai&quot;</span>
+</span><span id="__span-41-10"><a id="__codelineno-41-10" name="__codelineno-41-10"></a><span class="w">    </span><span class="s">&quot;trpc.group/trpc-go/trpc-agent-go/runner&quot;</span>
+</span><span id="__span-41-11"><a id="__codelineno-41-11" name="__codelineno-41-11"></a><span class="w">    </span><span class="s">&quot;trpc.group/trpc-go/trpc-agent-go/session/inmemory&quot;</span>
+</span><span id="__span-41-12"><a id="__codelineno-41-12" name="__codelineno-41-12"></a><span class="w">    </span><span class="s">&quot;trpc.group/trpc-go/trpc-agent-go/session/summary&quot;</span>
+</span><span id="__span-41-13"><a id="__codelineno-41-13" name="__codelineno-41-13"></a><span class="p">)</span>
+</span><span id="__span-41-14"><a id="__codelineno-41-14" name="__codelineno-41-14"></a>
+</span><span id="__span-41-15"><a id="__codelineno-41-15" name="__codelineno-41-15"></a><span class="kd">func</span><span class="w"> </span><span class="nx">main</span><span class="p">()</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-41-16"><a id="__codelineno-41-16" name="__codelineno-41-16"></a><span class="w">    </span><span class="nx">ctx</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">context</span><span class="p">.</span><span class="nx">Background</span><span class="p">()</span>
+</span><span id="__span-41-17"><a id="__codelineno-41-17" name="__codelineno-41-17"></a>
+</span><span id="__span-41-18"><a id="__codelineno-41-18" name="__codelineno-41-18"></a><span class="w">    </span><span class="c1">// Create LLM model for chat and summary</span>
+</span><span id="__span-41-19"><a id="__codelineno-41-19" name="__codelineno-41-19"></a><span class="w">    </span><span class="nx">llm</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">openai</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span><span class="s">&quot;gpt-4&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">openai</span><span class="p">.</span><span class="nx">WithAPIKey</span><span class="p">(</span><span class="s">&quot;your-api-key&quot;</span><span class="p">))</span>
+</span><span id="__span-41-20"><a id="__codelineno-41-20" name="__codelineno-41-20"></a>
+</span><span id="__span-41-21"><a id="__codelineno-41-21" name="__codelineno-41-21"></a><span class="w">    </span><span class="c1">// Create summarizer with flexible trigger conditions</span>
+</span><span id="__span-41-22"><a id="__codelineno-41-22" name="__codelineno-41-22"></a><span class="w">    </span><span class="nx">summarizer</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">summary</span><span class="p">.</span><span class="nx">NewSummarizer</span><span class="p">(</span>
+</span><span id="__span-41-23"><a id="__codelineno-41-23" name="__codelineno-41-23"></a><span class="w">        </span><span class="nx">llm</span><span class="p">,</span>
+</span><span id="__span-41-24"><a id="__codelineno-41-24" name="__codelineno-41-24"></a><span class="w">        </span><span class="nx">summary</span><span class="p">.</span><span class="nx">WithMaxSummaryWords</span><span class="p">(</span><span class="mi">200</span><span class="p">),</span>
+</span><span id="__span-41-25"><a id="__codelineno-41-25" name="__codelineno-41-25"></a><span class="w">        </span><span class="nx">summary</span><span class="p">.</span><span class="nx">WithChecksAny</span><span class="p">(</span>
+</span><span id="__span-41-26"><a id="__codelineno-41-26" name="__codelineno-41-26"></a><span class="w">            </span><span class="nx">summary</span><span class="p">.</span><span class="nx">CheckEventThreshold</span><span class="p">(</span><span class="mi">20</span><span class="p">),</span>
+</span><span id="__span-41-27"><a id="__codelineno-41-27" name="__codelineno-41-27"></a><span class="w">            </span><span class="nx">summary</span><span class="p">.</span><span class="nx">CheckTokenThreshold</span><span class="p">(</span><span class="mi">4000</span><span class="p">),</span>
+</span><span id="__span-41-28"><a id="__codelineno-41-28" name="__codelineno-41-28"></a><span class="w">            </span><span class="nx">summary</span><span class="p">.</span><span class="nx">CheckTimeThreshold</span><span class="p">(</span><span class="mi">5</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Minute</span><span class="p">),</span><span class="w"> </span><span class="c1">// 在摘要检查时判断；比较被检查 session 的最后一个事件（在增量摘要路径里通常就是最近一个待摘要事件）</span>
+</span><span id="__span-41-29"><a id="__codelineno-41-29" name="__codelineno-41-29"></a><span class="w">        </span><span class="p">),</span>
+</span><span id="__span-41-30"><a id="__codelineno-41-30" name="__codelineno-41-30"></a><span class="w">    </span><span class="p">)</span>
+</span><span id="__span-41-31"><a id="__codelineno-41-31" name="__codelineno-41-31"></a>
+</span><span id="__span-41-32"><a id="__codelineno-41-32" name="__codelineno-41-32"></a><span class="w">    </span><span class="c1">// Create session service with summarizer</span>
+</span><span id="__span-41-33"><a id="__codelineno-41-33" name="__codelineno-41-33"></a><span class="w">    </span><span class="nx">sessionService</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">NewSessionService</span><span class="p">(</span>
+</span><span id="__span-41-34"><a id="__codelineno-41-34" name="__codelineno-41-34"></a><span class="w">        </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithSummarizer</span><span class="p">(</span><span class="nx">summarizer</span><span class="p">),</span>
+</span><span id="__span-41-35"><a id="__codelineno-41-35" name="__codelineno-41-35"></a><span class="w">        </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithAsyncSummaryNum</span><span class="p">(</span><span class="mi">2</span><span class="p">),</span>
+</span><span id="__span-41-36"><a id="__codelineno-41-36" name="__codelineno-41-36"></a><span class="w">        </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithSummaryQueueSize</span><span class="p">(</span><span class="mi">100</span><span class="p">),</span>
+</span><span id="__span-41-37"><a id="__codelineno-41-37" name="__codelineno-41-37"></a><span class="w">        </span><span class="nx">inmemory</span><span class="p">.</span><span class="nx">WithSummaryJobTimeout</span><span class="p">(</span><span class="mi">60</span><span class="o">*</span><span class="nx">time</span><span class="p">.</span><span class="nx">Second</span><span class="p">),</span>
+</span><span id="__span-41-38"><a id="__codelineno-41-38" name="__codelineno-41-38"></a><span class="w">    </span><span class="p">)</span>
+</span><span id="__span-41-39"><a id="__codelineno-41-39" name="__codelineno-41-39"></a>
+</span><span id="__span-41-40"><a id="__codelineno-41-40" name="__codelineno-41-40"></a><span class="w">    </span><span class="c1">// Create agent with summary injection enabled</span>
+</span><span id="__span-41-41"><a id="__codelineno-41-41" name="__codelineno-41-41"></a><span class="w">    </span><span class="nx">agent</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">New</span><span class="p">(</span>
+</span><span id="__span-41-42"><a id="__codelineno-41-42" name="__codelineno-41-42"></a><span class="w">        </span><span class="s">&quot;my-agent&quot;</span><span class="p">,</span>
+</span><span id="__span-41-43"><a id="__codelineno-41-43" name="__codelineno-41-43"></a><span class="w">        </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithModel</span><span class="p">(</span><span class="nx">llm</span><span class="p">),</span>
+</span><span id="__span-41-44"><a id="__codelineno-41-44" name="__codelineno-41-44"></a><span class="w">        </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithAddSessionSummary</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
+</span><span id="__span-41-45"><a id="__codelineno-41-45" name="__codelineno-41-45"></a><span class="w">        </span><span class="nx">llmagent</span><span class="p">.</span><span class="nx">WithMaxHistoryRuns</span><span class="p">(</span><span class="mi">10</span><span class="p">),</span>
+</span><span id="__span-41-46"><a id="__codelineno-41-46" name="__codelineno-41-46"></a><span class="w">    </span><span class="p">)</span>
+</span><span id="__span-41-47"><a id="__codelineno-41-47" name="__codelineno-41-47"></a>
+</span><span id="__span-41-48"><a id="__codelineno-41-48" name="__codelineno-41-48"></a><span class="w">    </span><span class="c1">// Create runner</span>
+</span><span id="__span-41-49"><a id="__codelineno-41-49" name="__codelineno-41-49"></a><span class="w">    </span><span class="nx">r</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">runner</span><span class="p">.</span><span class="nx">NewRunner</span><span class="p">(</span><span class="s">&quot;my-app&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">agent</span><span class="p">,</span>
+</span><span id="__span-41-50"><a id="__codelineno-41-50" name="__codelineno-41-50"></a><span class="w">        </span><span class="nx">runner</span><span class="p">.</span><span class="nx">WithSessionService</span><span class="p">(</span><span class="nx">sessionService</span><span class="p">))</span>
+</span><span id="__span-41-51"><a id="__codelineno-41-51" name="__codelineno-41-51"></a>
+</span><span id="__span-41-52"><a id="__codelineno-41-52" name="__codelineno-41-52"></a><span class="w">    </span><span class="c1">// Run conversation - summary will be managed automatically</span>
+</span><span id="__span-41-53"><a id="__codelineno-41-53" name="__codelineno-41-53"></a><span class="w">    </span><span class="nx">userMsg</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">model</span><span class="p">.</span><span class="nx">NewUserMessage</span><span class="p">(</span><span class="s">&quot;Tell me about AI&quot;</span><span class="p">)</span>
+</span><span id="__span-41-54"><a id="__codelineno-41-54" name="__codelineno-41-54"></a><span class="w">    </span><span class="nx">eventChan</span><span class="p">,</span><span class="w"> </span><span class="nx">_</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="nx">r</span><span class="p">.</span><span class="nx">Run</span><span class="p">(</span><span class="nx">ctx</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;user123&quot;</span><span class="p">,</span><span class="w"> </span><span class="s">&quot;session456&quot;</span><span class="p">,</span><span class="w"> </span><span class="nx">userMsg</span><span class="p">)</span>
+</span><span id="__span-41-55"><a id="__codelineno-41-55" name="__codelineno-41-55"></a>
+</span><span id="__span-41-56"><a id="__codelineno-41-56" name="__codelineno-41-56"></a><span class="w">    </span><span class="c1">// Consume events</span>
+</span><span id="__span-41-57"><a id="__codelineno-41-57" name="__codelineno-41-57"></a><span class="w">    </span><span class="k">for</span><span class="w"> </span><span class="nx">event</span><span class="w"> </span><span class="o">:=</span><span class="w"> </span><span class="k">range</span><span class="w"> </span><span class="nx">eventChan</span><span class="w"> </span><span class="p">{</span>
+</span><span id="__span-41-58"><a id="__codelineno-41-58" name="__codelineno-41-58"></a><span class="w">        </span><span class="nx">_</span><span class="w"> </span><span class="p">=</span><span class="w"> </span><span class="nx">event</span>
+</span><span id="__span-41-59"><a id="__codelineno-41-59" name="__codelineno-41-59"></a><span class="w">    </span><span class="p">}</span>
+</span><span id="__span-41-60"><a id="__codelineno-41-60" name="__codelineno-41-60"></a><span class="p">}</span>
 </span></code></pre></div></td></tr></table></div>
 <h2 id="_30">参考资源</h2>
 <ul>
@@ -5594,7 +5691,7 @@ request，用来检查历史大 <code>tool result</code> 是否按预期被替�
     <span class="md-icon" title="最后更新">
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M21 13.1c-.1 0-.3.1-.4.2l-1 1 2.1 2.1 1-1c.2-.2.2-.6 0-.8l-1.3-1.3c-.1-.1-.2-.2-.4-.2m-1.9 1.8-6.1 6V23h2.1l6.1-6.1zM12.5 7v5.2l4 2.4-1 1L11 13V7zM11 21.9c-5.1-.5-9-4.8-9-9.9C2 6.5 6.5 2 12 2c5.3 0 9.6 4.1 10 9.3-.3-.1-.6-.2-1-.2s-.7.1-1 .2C19.6 7.2 16.2 4 12 4c-4.4 0-8 3.6-8 8 0 4.1 3.1 7.5 7.1 7.9l-.1.2z"/></svg>
     </span>
-    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_datetime" title="2026年6月10日 08:50:52 UTC">2026-06-10 08:50:52</span>
+    <span class="git-revision-date-localized-plugin git-revision-date-localized-plugin-iso_datetime" title="2026年6月22日 02:46:52 UTC">2026-06-22 02:46:52</span>
   </span>
 
     
